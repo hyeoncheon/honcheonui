@@ -1,20 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Buffalo - Honcheonui</title>
-    <%= stylesheetTag("application.css") %>
-    <meta name="csrf-param" content="authenticity_token" />
-    <meta name="csrf-token" content="<%= authenticity_token %>" />
-    <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
-  </head>
-  <body>
+	<head>
+		<meta charset="utf-8">
+		<title>Honcheonui</title>
+		<%= stylesheetTag("application.css") %>
+		<%= stylesheetTag("epoxy.css") %>
+		<meta name="csrf-param" content="authenticity_token" />
+		<meta name="csrf-token" content="<%= authenticity_token %>" />
+		<link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
+	</head>
+	<body>
 
-    <div class="container">
-      <%= partial("flash.html") %>
-      <%= yield %>
-    </div>
+	<!-- ---- layout: title-bar -->
+ 	<div id="navbar-wrapper">
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<span class="navbar-brand push_menu fa fa-bars"></span>
+						<a href="/" class="navbar-brand">Honcheonui</a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a id="user-profile" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/skull.png" class="img-responsive img-thumbnail img-circle"></a>
+							<ul class="dropdown-menu dropdown-block menu" role="menu">
+								<li><span>User Name</span></li>
+								<li><a href="/profile">Profile</a></li>
+								<li><a href="/settings">Settings</a></li>
+								<li><a href="/logout">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	</div>
 
-    <%= javascriptTag("application.js") %>
-  </body>
+	<!-- ---- layout: side-bar and content -->
+	<div class="container-fluid filly">
+		<div class="row filly">
+			<div id="body-wrapper" class="filly">
+				<div class="content filly">
+					<div class="col-md-12">
+<%= partial("flash.html") %>
+<%= yield %>
+					</div>
+				</div>
+				<div class="side-bar filly">
+				<ul>
+					<!--
+					<li class="menu-head">
+						HONCHEONUI <a href="#" class="push_menu"><span class="fa fa-bars pull-right"></span></a>
+					</li>
+					-->
+					<div class="menu">
+						<li>
+							<a href="/">Dashboard <span class="fa fa-tachometer pull-right"></span></a>
+						</li>
+						<li class="active">
+							<a href="/services">Services <span class="fa fa-server pull-right"></span></a>
+						</li>
+						<li>
+							<a href="/alerts">Alerts <span class="fa fa-bell pull-right"></span></a>
+						</li>
+						<li>
+							<a href="/settings">Settings <span class="fa fa-cog pull-right"></span></a>
+						</li>
+					</div>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<%= javascriptTag("application.js") %>
+	<%= javascriptTag("epoxy.js") %>
+	</body>
 </html>
