@@ -32,6 +32,9 @@ func AuthCallback(c buffalo.Context) error {
 	if err != nil {
 		return c.Error(401, err)
 	}
+
+	sess := c.Session()
+	sess.Set("member_id", 928393)
 	// Do something with the user, maybe register them/sign them in
 	return c.Render(200, r.JSON(user))
 }

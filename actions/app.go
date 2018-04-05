@@ -56,11 +56,19 @@ func App() *buffalo.App {
 		app.Use(T.Middleware())
 
 		app.GET("/", HomeHandler)
+		app.GET("/login", LoginHandler)
+		app.GET("/logout", LogoutHandler)
 
 		// authorization with uart
 		auth := app.Group("/auth")
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
 		auth.GET("/{provider}/callback", AuthCallback)
+
+		// protect resources and set context for the session
+		app.Use(AuthorizeHandler)
+		app.Middleware.Skip(AuthorizeHandler, LoginHandler)
+		app.Use(contextHandler)
+
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
