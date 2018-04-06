@@ -12,7 +12,7 @@ func AuthorizeHandler(next buffalo.Handler) buffalo.Handler {
 		memberID := c.Session().Get("member_id")
 		if memberID == nil {
 			c.Logger().Warn("unauthorized access to ", c.Request().RequestURI)
-			c.Flash().Add("danger", "login required")
+			c.Flash().Add("danger", t(c, "login.required"))
 			return c.Redirect(http.StatusTemporaryRedirect, "/login")
 		}
 		return next(c)

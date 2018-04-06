@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Honcheonui</title>
+		<title><%= t("honcheonui") %></title>
 		<%= stylesheetTag("application.css") %>
 		<%= stylesheetTag("epoxy.css") %>
 		<meta name="csrf-param" content="authenticity_token" />
@@ -18,7 +18,7 @@
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<span class="navbar-brand push_menu fa fa-bars"></span>
-						<a href="/" class="navbar-brand">Honcheonui</a>
+						<a href="/" class="navbar-brand"><%= t("honcheonui") %></a>
 					</div><%= if (member_id) { %>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -26,9 +26,9 @@
 							<ul class="dropdown-menu dropdown-block menu" role="menu">
 								<li><span>User Name</span></li>
 								<li><span>ID: <%= member_id %></span></li>
-								<li><a href="/profile">Profile</a></li>
-								<li><a href="/settings">Settings</a></li>
-								<li><a href="/logout">Logout</a></li>
+								<li><a href="/profile"><%= t("profile") %></a></li>
+								<li><a href="/settings"><%= t("settings") %></a></li>
+								<li><a href="/logout"><%= t("logout") %></a></li>
 							</ul>
 						</li>
 					</ul><% } %>
@@ -56,16 +56,16 @@
 					-->
 					<div class="menu">
 						<li>
-							<a href="/">Dashboard <span class="fa fa-tachometer pull-right"></span></a>
+							<a href="/"><%= t("dashboard") %> <span class="fa fa-tachometer pull-right"></span></a>
 						</li>
 						<li class="active">
-							<a href="/services">Services <span class="fa fa-server pull-right"></span></a>
+							<a href="/services"><%= t("services") %> <span class="fa fa-server pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/alerts">Alerts <span class="fa fa-bell pull-right"></span></a>
+							<a href="/alerts"><%= t("alerts") %> <span class="fa fa-bell pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/settings">Settings <span class="fa fa-cog pull-right"></span></a>
+							<a href="/settings"><%= t("settings") %> <span class="fa fa-cog pull-right"></span></a>
 						</li>
 					</div>
 				</ul>

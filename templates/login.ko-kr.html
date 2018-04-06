@@ -1,0 +1,35 @@
+<div class="row">
+	<div id="login-dialog"
+		class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+		<h2>현천 사용자인가요?</h2>
+		<p>
+		이 서비스는 현천에서 제공하는 UART 단일 로그인을 사용합니다.<br>
+		UART를 통해서 로그인하세요.
+		</p>
+		<a href="/auth/uart" id="login-button"
+			class="col-xs-6 col-xs-offset-3 btn btn-success">UART로 로그인</a>
+	</div>
+</div>
+
+<style>
+#body-wrapper .content {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+#login-dialog {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 30px;
+}
+
+#login-dialog h2 {
+	margin-top: 0;
+}
+
+#login-dialog #login-button {
+	text-align: center;
+	margin-top: 10px;
+}
+</style>

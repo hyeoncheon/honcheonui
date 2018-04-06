@@ -4,21 +4,21 @@
 
 # authorize, login/logout, and menu items
 - id: "login.required"
-  translation: "Login required!"
+  translation: "로그인 해야합니다!"
 - id: "you.have.been.successfully.logged.out"
-  translation: "You have been successfully logged out."
+  translation: "안전하게 로그아웃 되었습니다."
 
 - id: honcheonui
-  translation: Honcheonui
+  translation: 혼천의
 - id: profile
-  translation: Profile
+  translation: 프로필
 - id: settings
-  translation: Settings
+  translation: 설정
 - id: logout
-  translation: Logout
+  translation: 로그아웃
 - id: dashboard
-  translation: Dashboard
+  translation: 현황판
 - id: services
-  translation: Services
+  translation: 서비스
 - id: alerts
-  translation: Alerts
+  translation: 경보

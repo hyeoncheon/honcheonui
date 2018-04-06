@@ -21,6 +21,6 @@ func LoginHandler(c buffalo.Context) error {
 func LogoutHandler(c buffalo.Context) error {
 	sess := c.Session()
 	sess.Clear()
-	c.Flash().Add("success", "you.have.been.successfully.logged.out")
+	c.Flash().Add("success", t(c, "you.have.been.successfully.logged.out"))
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }
