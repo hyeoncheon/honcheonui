@@ -13,3 +13,4 @@ honcheonui
 .grifter/
 .env
 database.yml
+/migrations/schema.sql

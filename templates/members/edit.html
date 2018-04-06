@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h1>Edit Member</h1>
+</div>
+
+<%= form_for(member, {action: memberPath({ member_id: member.ID }),
+	method: "PUT", class: "horizontal"}) { %>
+	<div class="page-content">
+	<%= partial("members/form.html") %>
+	</div>
+	<div class="page-tail pull-right">
+		<button class="btn btn-success" role="submit">Save</button>
+		<a href="<%= memberPath({ member_id: member.ID }) %>"
+			class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+	</div>
+<% } %>
