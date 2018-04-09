@@ -93,12 +93,16 @@ html, body {
 			}
 		}
 		.dropdown-menu {
-			& > li > span,
-			& > li > a {
-				display: block;
-				padding: 8px 20px;
-				clear: both;
-				font-weight: 400;
+			& > li {
+				span, a {
+					display: block;
+					padding: 8px 20px;
+					clear: both;
+					font-weight: 400;
+				}
+				&.active a {
+					background-color: #000;
+				}
 			}
 		}
 	}
@@ -117,7 +121,6 @@ html, body {
 @media (min-width: 8px) {
 	.navbar-inverse .navbar-nav .open .dropdown-menu > li > span,
 	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-		color: #9d9d9d;
 	}
 }
 

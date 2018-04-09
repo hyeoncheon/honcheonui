@@ -70,6 +70,8 @@ func App() *buffalo.App {
 		app.Use(contextHandler)
 
 		app.Resource("/members", MembersResource{})
+		app.GET("/profile", ProfileShow)
+		app.GET("/settings", ProfileSettings)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
