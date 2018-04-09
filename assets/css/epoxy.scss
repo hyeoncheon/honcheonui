@@ -39,19 +39,17 @@ html, body {
 
 #body-wrapper { // --- layout: sliding side-bar
 	padding-top: $header-height;
-	position: relative;
 	.side-bar {
-		position: relative;
+		position: fixed;
+		top: 0;
+		padding-top: $header-height;
 		width: $sidebar-width;
 		background-color: $sidebar-background;
 		float: left;
 		transition: margin-left 0.5s;
 	}
 	.content {
-		z-index: 0;
-		position: fixed;
-		top: 0;
-		padding-top: $header-height + 15px;
+		padding-top: 15px;
 		padding-left: $sidebar-width;
 		transition: padding-left 0.5s;
 	}

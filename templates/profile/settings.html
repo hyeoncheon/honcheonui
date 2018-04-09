@@ -2,13 +2,74 @@
 	<h1>Settings</h1>
 </div>
 
-<div class="page-content">
-<%= partial("profile/profile.html") %>
-<div class="pull-right">
-	<a href="<%= uart_url %>/membership/me"
-		class="btn btn-default">UART Profile</a>
-</div>
+<div class="page-content row">
+	<div class="content-block col-xs-12" id="settings-profile">
+		<%= partial("profile/profile.html") %>
+		<div class="pull-right">
+			<a href="<%= uart_url %>/membership/me"
+				class="btn btn-xs btn-default">See UART Profile</a>
+		</div>
+	</div>
+
+	<div class="content-block col-xs-12" id="settings-providers">
+		<h2>Providers</h2>
+		<%= partial("providers/table.html") %>
+		<div class="pull-right">
+			<a class="btn btn-xs btn-default"
+				data-toggle="modal" data-target="#newProvider"><%=
+				t("add.new.provider")%></a>
+		</div>
+	</div>
 </div>
 
 <div class="page-tail pull-right">
 </div>
+
+
+<!-- Modal for Role -->
+<div class="modal fade" id="newProvider" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><%=t("add.new.provider")%></h4>
+			</div>
+			<%= form_for(provider,
+			{action: "", method: "POST", class: "horizontal"}) { %>
+			<div class="modal-body">
+				<p><%=t("modal.message.add.your.resource.provider")%></p>
+				<p id="modal-error" class="alert alert-danger hide"></p>
+				<%= partial("providers/form.html") %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" data-dismiss="modal"
+					aria-label="Close"><%=t("close")%></button>
+				<span id="submit" class="btn btn-success"><%=t("add")%></span>
+			</div>
+			<% } %>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#submit").click(function() {
+		var formData = $(".horizontal").serialize();
+		$.ajax({
+			type: "POST",
+			url: "<%= providersPath() %>",
+			cache: false,
+			data: formData,
+			success: function(json, status) {
+				$('#newProvider').modal('hide');
+				location.reload();
+			},
+			error: function(data, status) {
+				$("#modal-error").removeClass("hide");
+				$("#modal-error").text("asdf");
+			}
+		});
+	});
+});
+</script>
