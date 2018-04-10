@@ -41,6 +41,7 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
+      moment: "moment",
       jQuery: "jquery"
     }),
     new ExtractTextPlugin("[name].[hash].css"),

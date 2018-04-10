@@ -22,6 +22,7 @@ func AuthorizeHandler(next buffalo.Handler) buffalo.Handler {
 
 func contextHandler(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
+		c.Set("TIME_FORMAT", "2006-01-02T15:04:05Z07:00")
 		memberID := c.Session().Get("member_id")
 		if memberID != nil {
 			if id, ok := memberID.(uuid.UUID); ok {
