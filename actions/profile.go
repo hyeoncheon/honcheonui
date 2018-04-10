@@ -33,8 +33,9 @@ func ProfileSettings(c buffalo.Context) error {
 		return errors.WithStack(err)
 	}
 
-	supportedProviders := map[string]string{
-		"SoftLayer": "softlayer",
+	supportedProviders := make(map[string]string)
+	for _, p := range getPluginList(c) {
+		supportedProviders[p] = p
 	}
 	c.Set("providers", providers)
 	c.Set("provider", &models.Provider{})

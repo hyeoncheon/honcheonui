@@ -1,7 +1,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>MemberID</th>
+					<th>Member</th>
 					<th>Provider</th>
 					<th>User</th>
 					<th>Pass</th>
@@ -11,21 +11,21 @@
 				</tr>
 			</thead>
 			<tbody><%= for (provider) in providers { %>
-		 		<tr>
-		 			<td><%= provider.MemberID %></td>
-			 		<td><%= provider.Provider %></td>
-			 		<td><%= provider.User %></td>
-			 		<td><%= provider.Pass %></td>
-			 		<td><%= provider.GroupID %></td>
-			 		<td><%= provider.UserID %></td>
-			 		<td>
-				 		<div class="pull-right btn-group mixin-nobreak">
-					 		<a href="<%= providerPath({ provider_id: provider.ID }) %>"
+				<tr>
+					<td><%= provider.Member() %></td>
+					<td><%= provider.Provider %></td>
+					<td><%= provider.User %></td>
+					<td><%= truncate(provider.Pass,{"size":11}) %></td>
+					<td><%= provider.GroupID %></td>
+					<td><%= provider.UserID %></td>
+					<td>
+						<div class="pull-right btn-group mixin-nobreak">
+							<a href="<%= providerPath({ provider_id: provider.ID }) %>"
 								data-method="DELETE" data-confirm="Are you sure?"
 								class="btn btn-xs btn-danger">Destroy</a>
-				 		</div>
-			 		</td>
-		 		</tr>
+						</div>
+					</td>
+				</tr>
 				<% } %>
 			</tbody>
 		</table>

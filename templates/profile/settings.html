@@ -67,7 +67,7 @@ $(document).ready(function() {
 			},
 			error: function(data, status) {
 				$("#modal-error").removeClass("hide");
-				$("#modal-error").text("asdf");
+				$("#modal-error").text(data.responseText);
 			}
 		});
 	});

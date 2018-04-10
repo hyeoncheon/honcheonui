@@ -2,6 +2,7 @@ package actions
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
@@ -47,8 +48,18 @@ func (v ProvidersResource) Create(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
-	provider.GroupID = "1234"
-	provider.UserID = "123456"
+	plugin, err := getPlugin(provider.Provider)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	uid, aid, err := plugin.CheckAccount(provider.User, provider.Pass)
+	if err != nil {
+		return c.Render(http.StatusUnprocessableEntity, r.String("plugin error: %v", err))
+	}
+
+	c.Logger().Debugf("check account: %v %v %v", uid, aid, err)
+	provider.GroupID = strconv.Itoa(aid)
+	provider.UserID = strconv.Itoa(uid)
 	provider.MemberID = c.Session().Get("member_id").(uuid.UUID)
 	verrs, err := tx.ValidateAndCreate(provider)
 	if err != nil {

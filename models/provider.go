@@ -27,6 +27,15 @@ func (p Provider) String() string {
 	return p.Provider + "/" + p.User
 }
 
+// Member returns owner of the provider entity
+func (p Provider) Member() *Member {
+	member := &Member{}
+	if err := DB.Find(member, p.MemberID); err != nil {
+		return nil
+	}
+	return member
+}
+
 // Providers is array of providers
 type Providers []Provider
 
