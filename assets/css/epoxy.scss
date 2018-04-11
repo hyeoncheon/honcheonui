@@ -9,6 +9,11 @@
  * https://bootsnipp.com/snippets/3xjDn
  */
 
+$color-matt: #f9f9f9;
+$color-matt: #ebddda;
+$color-main: #d5a98c;
+$color-highlight: #74402b;
+
 $header-height: 50px;
 $header-avatar-size: 32px;
 $font-size: 16px;
@@ -16,7 +21,9 @@ $font-size: 16px;
 $sidebar-width: 200px;
 $sidebar-min-width: 52px;
 $sidebar-background: #74afad;
-$sidebar-highlight: #74afad;
+$sidebar-background: $color-main;
+$sidebar-highlight: #d9853b;
+$sidebar-highlight: $color-highlight;
 
 @import url('https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow|PT+Serif');
 
@@ -26,7 +33,7 @@ html, body {
 	height: 100%;
 	font-family: "PT Sans", MalgunGothic, NanumGothic;
 	font-size: $font-size;
-	background-color: #f9f9f9;
+	background-color: $color-matt;
 }
 
 .filly {
@@ -155,7 +162,7 @@ a, a:hover, a:visited {
 				}
 				&.active {
 					& > a {
-						background: #d9853b;
+						background: $sidebar-highlight;
 						// --- active decoration arrow
 						&:before {
 							content:"";
@@ -164,7 +171,7 @@ a, a:hover, a:visited {
 							height: 0;
 							border-top: 20px solid transparent;
 							border-bottom: 20px solid transparent;
-							border-left: 7px solid #D9853B;
+							border-left: 7px solid $sidebar-highlight;
 							margin-top: -10px;
 							margin-left: 180px;
 						}

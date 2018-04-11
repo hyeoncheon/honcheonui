@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}
 		var time = moment($(e).text());
 		var html = '<span title="' + time.format() + '">';
-		if(now.diff(time, 'days') <= 365) {
+		if(now.diff(time, 'days') <= 28) {
 			html += time.fromNow();
 		} else {
 			html += time.format(format);

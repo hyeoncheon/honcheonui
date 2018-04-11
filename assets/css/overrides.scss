@@ -2,14 +2,25 @@
 .mixin-strong {
 	font-weight: 600;
 }
+.mixin-green {
+	color: green;
+}
 
 /* override default styles of bootstrap */
+
+.btn-group {
+	display: flex;
+}
 
 .page-header {
 	margin-top: 0;
 	h1 {
 		margin-top: 0;
 	}
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: rgba(0,0,0, 0.05);
 }
 
 form.horizontal {
