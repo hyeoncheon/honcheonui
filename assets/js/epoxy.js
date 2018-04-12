@@ -21,8 +21,14 @@ $(document).ready(function(){
 
 	$(".menu a:not('.selector')").parent().removeClass("active");
 	$(".menu a:not('.selector')").each(function(index) {
-		if ($(this).attr('href') == document.location.pathname) {
-			$(this).parent().addClass("active");
+		if ($(this).attr('href') == "/") {
+			if (document.location.pathname == "/") {
+				$(this).parent().addClass("active");
+			}
+		} else {
+			if (document.location.pathname.startsWith($(this).attr('href'))) {
+				$(this).parent().addClass("active");
+			}
 		}
 	});
 });

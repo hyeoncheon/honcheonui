@@ -56,22 +56,47 @@
 				<ul>
 					<!--
 					<li class="menu-head">
-						HONCHEONUI <a href="#" class="push_menu"><span class="fa fa-bars pull-right"></span></a>
+						HONCHEONUI <a href="#" class="push_menu"><span
+							class="fa fa-bars pull-right"></span></a>
 					</li>
 					-->
 					<div class="menu">
 						<li>
-							<a href="/"><%= t("dashboard") %> <span class="fa fa-tachometer pull-right"></span></a>
+							<a href="/"><%= t("dashboard") %> <span
+									class="fa fa-tachometer pull-right"></span></a>
 						</li>
 						<li class="active">
-							<a href="/services"><%= t("services") %> <span class="fa fa-server pull-right"></span></a>
+							<a href="/services"><%= t("services") %> <span
+									class="fa fa-asterisk pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/alerts"><%= t("alerts") %> <span class="fa fa-bell pull-right"></span></a>
+							<a href="/alerts"><%= t("alerts") %> <span
+									class="fa fa-bell pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/settings"><%= t("settings") %> <span class="fa fa-cog pull-right"></span></a>
+							<a href="/settings"><%= t("settings") %> <span
+									class="fa fa-cog pull-right"></span></a>
+						</li><%= if (has(member_roles, "admin")) { %>
+						<li class="admin">
+							<a href="/members"><%= t("members") %> <span
+									class="fa fa-users pull-right"></span></a>
 						</li>
+						<li class="admin">
+							<a href="/providers"><%= t("providers") %> <span
+									class="fa fa-link pull-right"></span></a>
+						</li>
+						<li class="admin">
+							<a href="/resources"><%= t("resources") %> <span
+									class="fa fa-server pull-right"></span></a>
+						</li>
+						<li class="admin">
+							<a href="/tags"><%= t("tags") %> <span
+									class="fa fa-tags pull-right"></span></a>
+						</li>
+						<li class="admin">
+							<a href="/admin"><%= t("admin") %> <span
+									class="fa fa-empire pull-right"></span></a>
+						</li><% } %>
 					</div>
 				</ul>
 				</div><% } %>

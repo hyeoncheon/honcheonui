@@ -32,6 +32,7 @@ func (v MembersResource) List(c buffalo.Context) error {
 }
 
 // Show gets the data for one Member.
+//! MANAGER ONLY, currently not protected
 func (v MembersResource) Show(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
@@ -42,6 +43,10 @@ func (v MembersResource) Show(c buffalo.Context) error {
 	if err := tx.Find(member, c.Param("member_id")); err != nil {
 		return c.Error(404, err)
 	}
+
+	// TODO: which services
+	// TODO: which resources
+	// TODO: which providers
 
 	return c.Render(200, r.Auto(c, member))
 }

@@ -71,6 +71,7 @@ func AuthCallback(c buffalo.Context) error {
 		}
 	}
 
+	// NOTE: set initial session data for this login session
 	sess := c.Session()
 	sess.Set("member_id", member.ID)
 	sess.Set("member_mail", member.Email)
@@ -110,5 +111,6 @@ func createMember(tx *pop.Connection, u *goth.User) (*models.Member, error) {
 	if verrs.HasAny() {
 		return &models.Member{}, errors.WithStack(errors.New("cannot.create.member..validation.error"))
 	}
+	// TODO: add HTTP provider as default
 	return member, nil
 }

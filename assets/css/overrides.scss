@@ -1,10 +1,10 @@
+$color-border: #ccc;
+
 /* mixins */
-.mixin-strong {
-	font-weight: 600;
-}
-.mixin-green {
-	color: green;
-}
+.mixin-strong { font-weight: 600; }
+.mixin-green { color: green; }
+.mixin-red { color: red; }
+.mixin-orange { color: orange; }
 
 /* override default styles of bootstrap */
 
@@ -16,6 +16,18 @@
 	margin-top: 0;
 	h1 {
 		margin-top: 0;
+	}
+}
+
+.table {
+	& > thead > tr > th,
+	& > thead > tr > td,
+	& > tbody > tr > th,
+	& > tbody > tr > td,
+	& > tfoot > tr > td,
+	& > tfoot > tr > th {
+		padding: 2px 6px;
+		border-top: 1px solid $color-border;
 	}
 }
 
@@ -58,4 +70,3 @@ form.horizontal {
 	height: 22px;
 	border-radius: 0;
 }
-

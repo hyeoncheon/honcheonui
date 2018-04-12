@@ -42,6 +42,9 @@ func (v ResourcesResource) Show(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
+	// TODO: Ownerships
+	// TODO: Linked Services
+
 	return c.Render(200, r.Auto(c, resource))
 }
 
@@ -57,7 +60,7 @@ func (v ResourcesResource) Update(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
-	//! sync via plugin
+	// TODO: sync via plugin
 
 	verrs, err := tx.ValidateAndUpdate(resource)
 	if err != nil {

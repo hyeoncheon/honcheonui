@@ -14,11 +14,12 @@ import (
 	"github.com/hyeoncheon/honcheonui/models"
 )
 
-// ENV is used to help switch settings based on where the
-// application is being run. Default is "development".
-var ENV = envy.Get("GO_ENV", "development")
-var app *buffalo.App
-var T *i18n.Translator
+// global variables
+var (
+	ENV = envy.Get("GO_ENV", "development")
+	app *buffalo.App
+	T   *i18n.Translator
+)
 
 // App is where all routes and middleware for buffalo
 // should be defined. This is the nerve center of your
@@ -28,6 +29,7 @@ func App() *buffalo.App {
 		app = buffalo.New(buffalo.Options{
 			Env:         ENV,
 			SessionName: "_honcheonui_session",
+			// TODO: add secure session store. should it be redis?
 		})
 		// Automatically redirect to SSL
 		app.Use(ssl.ForceSSL(secure.Options{
@@ -39,14 +41,13 @@ func App() *buffalo.App {
 			app.Use(middleware.ParameterLogger)
 		}
 
-		// Protect against CSRF attacks. https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
-		// Remove to disable this.
+		// https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
 		app.Use(csrf.New)
 
 		// Wraps each request in a transaction.
 		//  c.Value("tx").(*pop.PopTransaction)
-		// Remove to disable this.
 		app.Use(middleware.PopTransaction(models.DB))
+		models.SetLogger(app.Logger)
 
 		// Setup and use translations:
 		var err error
@@ -78,6 +79,7 @@ func App() *buffalo.App {
 		app.GET("/providers/{provider_id}/sync", ProvidersResource{}.Sync)
 		app.GET("/resources", ResourcesResource{}.List)
 		app.GET("/resources/{resource_id}", ResourcesResource{}.Show)
+		app.GET("/resources/{resource_id}/sync", ResourcesResource{}.Update)
 		app.DELETE("/resources/{resource_id}", ResourcesResource{}.Destroy)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

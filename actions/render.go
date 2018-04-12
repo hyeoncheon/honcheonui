@@ -13,18 +13,11 @@ var assetsBox = packr.NewBox("../public")
 
 func init() {
 	r = render.New(render.Options{
-		// HTML layout to be used for all HTML requests:
-		HTMLLayout: "application.html",
-
-		// Box containing all of the templates:
+		HTMLLayout:   "application.html",
 		TemplatesBox: packr.NewBox("../templates"),
 		AssetsBox:    assetsBox,
 
-		// Add template helpers here:
 		Helpers: render.Helpers{
-			// uncomment for non-Bootstrap form helpers:
-			// "form":     plush.FormHelper,
-			// "form_for": plush.FormForHelper,
 			"titleize": inflect.Titleize,
 			"iconize": func(s string) template.HTML {
 				switch s {
@@ -37,16 +30,24 @@ func init() {
 				case "database":
 					return template.HTML(`<i class="fa fa-database"></i>`)
 				case "status-true-true":
-					return template.HTML(`<i class="fa fa-battery-full mixin-green"></i>`)
+					return template.HTML(`<i class="fa fa-play-circle"></i>`)
 				case "status-true-false":
-					return template.HTML(`<i class="fa fa-battery-full"></i>`)
+					return template.HTML(`<i class="fa fa-power-off mixin-orange"></i>`)
 				case "status-false-true":
-					return template.HTML(`<i class="fa fa-battery-empty mixin-green"></i>`)
+					return template.HTML(`<i class="fa fa-signal"></i>`)
 				case "status-false-false":
-					return template.HTML(`<i class="fa fa-battery-empty"></i>`)
+					return template.HTML(`<i class="fa fa-power-off mixin-red"></i>`)
 				default:
 					return template.HTML(`<i class="fa fa-` + s + `"></i>`)
 				}
+			},
+			"has": func(a []string, v string) bool {
+				for _, e := range a {
+					if e == v {
+						return true
+					}
+				}
+				return false
 			},
 		},
 	})

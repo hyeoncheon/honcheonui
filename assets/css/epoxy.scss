@@ -9,10 +9,14 @@
  * https://bootsnipp.com/snippets/3xjDn
  */
 
+$color-text: #303030;
 $color-matt: #f9f9f9;
+
 $color-matt: #ebddda;
 $color-main: #d5a98c;
 $color-highlight: #74402b;
+
+$color-matt: #f3e8dc;
 
 $header-height: 50px;
 $header-avatar-size: 32px;
@@ -133,6 +137,13 @@ html, body {
 a, a:hover, a:visited {
 	text-decoration:none;
 }
+a.x-tag,
+.x-tag {
+	padding: 0 5px;
+	border-radius: 5px;
+	background-color: rgba(255,255,255, 0.5);
+	color: $color-text;
+}
 
 // ---- style: sidebar
 .side-bar {
@@ -155,9 +166,11 @@ a, a:hover, a:visited {
 					width: 100%;
 					display: inline-table; // block?
 					padding: 10px 20px;
+					transition: padding 0s;
 					&:hover, &.active {
 						border-left:3px solid #ececea;
 						padding-left:17px;
+						transition: padding-left 0s;
 					}
 				}
 				&.active {
@@ -174,6 +187,20 @@ a, a:hover, a:visited {
 							border-left: 7px solid $sidebar-highlight;
 							margin-top: -10px;
 							margin-left: 180px;
+						}
+						&.admin {
+							color: #f90;
+						}
+					}
+				}
+				&.admin {
+					background-color: #d08090;
+					&.active {
+						& > a {
+							background: #bb5555;
+							&:before {
+								border-left: 7px solid #bb5555;
+							}
 						}
 					}
 				}

@@ -16,7 +16,7 @@ func AuthorizeHandler(next buffalo.Handler) buffalo.Handler {
 			c.Flash().Add("danger", t(c, "login.required"))
 			return c.Redirect(http.StatusTemporaryRedirect, "/login")
 		}
-		//! need session validation for more security
+		// TODO: need session validation for more security
 		return next(c)
 	}
 }

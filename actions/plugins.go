@@ -9,6 +9,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+// TODO: plugin caching
+// TODO: reload if updated
+// TODO: plugin types
+
 // Provider interface
 type Provider interface {
 	Init() error
@@ -66,5 +70,6 @@ func getPlugin(name string) (Provider, error) {
 	if !ok {
 		return nil, errors.New("invalid plugin")
 	}
+	// TODO: version check and logging
 	return provider, nil
 }

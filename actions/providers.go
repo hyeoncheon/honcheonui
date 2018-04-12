@@ -39,7 +39,6 @@ func (v ProvidersResource) List(c buffalo.Context) error {
 }
 
 // Create adds a Provider to the DB.
-//! currently not implemented. just for testing now.
 func (v ProvidersResource) Create(c buffalo.Context) error {
 	provider := &models.Provider{}
 	if err := c.Bind(provider); err != nil {
