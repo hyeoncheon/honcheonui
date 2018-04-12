@@ -1,0 +1,59 @@
+<div class="page-header">
+	<h1><%= resource.Name %></h1>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>IP Address</th>
+			<th>Registered</th>
+			<th>Updated</th>
+			<th>Modified</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+<%= partial("resources/table_row.html") %>
+	</tbody>
+</table>
+
+<h3>Notes</h3>
+<blockquote class="well"><%= resource.Notes %></blockquote>
+
+<div class="row">
+	<div class="col-sm-6">
+		<h3>Properties</h3>
+		<table class="table table-striped">
+			<tbody>
+				<tr><td>Provider</td><td><%= resource.Provider %></td></tr>
+				<tr><td>Type</td><td><%= resource.Type %></td></tr>
+				<tr><td>Original ID</td><td><%= resource.OriginalID %></td></tr>
+				<tr><td>Group ID</td><td><%= resource.GroupID %></td></tr>
+				<tr><td>Location</td><td><%= resource.Location %></td></tr>
+				<tr><td>Registered</td><td class="time"
+						form="YYYY-MM-DD hh:mm"><%= resource.CreatedAt %></td></tr>
+				<tr><td>Updated</td><td class="time"
+						form="YYYY-MM-DD hh:mm"><%= resource.UpdatedAt %></td></tr>
+				<tr><td>Created</td><td class="time"
+						form="YYYY-MM-DD hh:mm"><%= resource.ResourceCreatedAt %></td></tr>
+				<tr><td>Modified</td><td class="time"
+						form="YYYY-MM-DD hh:mm"><%= resource.ResourceModifiedAt %></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-sm-6">
+		<h3>Attributes</h3>
+		<table class="table table-striped">
+			<tbody><%= for (attr) in resource.Attributes { %>
+				<tr>
+					<td><%= titleize(attr.Name) %></td><td><%= attr.Value %></td>
+				</tr><% } %>
+			</tbody>
+		</table>
+		<h3>Tags</h3>
+		<div><%= for (tag) in resource.Tags { %>
+			<a class="x-tag"><i class="fa fa-tag"></i> <%= tag.Name %></a> <% } %>
+		</div>
+	</div>
+</div>

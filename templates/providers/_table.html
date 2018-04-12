@@ -20,6 +20,8 @@
 					<td><%= provider.UserID %></td>
 					<td>
 						<div class="pull-right btn-group mixin-nobreak">
+							<a href="<%= providerSyncPath({ provider_id: provider.ID }) %>"
+								class="btn btn-xs btn-default">Sync</a>
 							<a href="<%= providerPath({ provider_id: provider.ID }) %>"
 								data-method="DELETE" data-confirm="Are you sure?"
 								class="btn btn-xs btn-danger">Destroy</a>

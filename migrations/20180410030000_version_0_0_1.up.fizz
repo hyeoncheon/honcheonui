@@ -1,0 +1,68 @@
+create_table("members", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("email", "string", {})
+})
+
+create_table("providers", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("member_id", "uuid", {})
+	t.Column("provider", "string", {})
+	t.Column("user", "string", {})
+	t.Column("pass", "string", {})
+	t.Column("group_id", "string", {})
+	t.Column("user_id", "string", {})
+})
+add_index("providers", "member_id", {})
+add_index("providers", "group_id", {})
+add_index("providers", "user_id", {})
+
+create_table("resources", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("provider", "string", {})
+	t.Column("type", "string", {})
+	t.Column("original_id", "string", {})
+	t.Column("uuid", "uuid", {})
+	t.Column("name", "string", {})
+	t.Column("notes", "string", {})
+	t.Column("group_id", "string", {})
+	t.Column("resource_created_at", "timestamp", {})
+	t.Column("resource_modified_at", "timestamp", {})
+	t.Column("ip_address", "string", {})
+	t.Column("location", "string", {})
+	t.Column("is_conn", "bool", {"default": false})
+	t.Column("is_on", "bool", {"default": false})
+})
+add_index("resources", "group_id", {})
+add_index("resources", ["provider", "type", "original_id"], {"unique": true})
+
+create_table("resources_tags", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("resource_id", "uuid", {})
+	t.Column("tag_id", "uuid", {})
+})
+add_index("resources_tags", "resource_id", {})
+add_index("resources_tags", "tag_id", {})
+add_index("resources_tags", ["resource_id", "tag_id"], {"unique": true})
+
+create_table("resources_users", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("resource_id", "uuid", {})
+	t.Column("user_id", "string", {})
+})
+add_index("resources_users", "resource_id", {})
+add_index("resources_users", "user_id", {})
+
+create_table("attributes", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("resource_id", "uuid", {})
+	t.Column("name", "string", {})
+	t.Column("value", "string", {})
+	t.ForeignKey("resource_id", {"resources": ["id"]}, {"on_delete": "cascade"})
+})
+add_index("attributes", "resource_id", {})
+add_index("attributes", ["resource_id", "name"], {"unique": true})
+
+create_table("tags", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("name", "string", {})
+})

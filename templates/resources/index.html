@@ -1,0 +1,23 @@
+<div class="page-header">
+	<h1>Resources</h1>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>IP Address</th>
+			<th>Registered</th>
+			<th>Updated</th>
+			<th>Modified</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody><%= for (resource) in resources { %>
+<%= partial("resources/table_row.html") %><% } %>
+	</tbody>
+</table>
+
+<div class="text-center">
+	<%= paginator(pagination) %>
+</div>

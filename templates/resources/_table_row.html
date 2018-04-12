@@ -1,0 +1,22 @@
+		<tr>
+			<td title="<%= resource.Provider
+				%>/<%= resource.GroupID
+				%>/<%= resource.OriginalID %>">
+				<%= iconize("status-"+resource.IsOn+"-"+resource.IsConn) %>
+				<%= iconize(resource.Type) %>
+				<%= resource.Name %></td>
+			<td title="<%= resource.Location %>"><%= resource.IPAddress %></td>
+			<td class="time" form="YYYY-MM-DD"><%= resource.CreatedAt %></td>
+			<td class="time" form="YYYY-MM-DD"><%= resource.UpdatedAt %></td>
+			<td title="Created: <%= resource.ResourceCreatedAt %>"
+				class="time" form="YYYY-MM-DD"><%= resource.ResourceModifiedAt %></td>
+			<td>
+				<div class="pull-right btn-group">
+					<a href="<%= resourcePath({ resource_id: resource.ID }) %>"
+						class="btn btn-xs btn-info">View</a>
+					<a href="<%= resourcePath({ resource_id: resource.ID }) %>"
+						data-method="DELETE" data-confirm="Are you sure?"
+						class="btn btn-xs btn-danger">Destroy</a>
+				</div>
+			</td>
+		</tr>

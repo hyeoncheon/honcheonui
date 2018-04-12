@@ -1,0 +1,7 @@
+drop_table("providers")
+drop_table("members")
+drop_table("attributes")
+drop_table("tags")
+drop_table("resources_users")
+drop_table("resources_tags")
+drop_table("resources")

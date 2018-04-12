@@ -1,9 +1,0 @@
-create_table("providers", func(t) {
-	t.Column("id", "uuid", {"primary": true})
-	t.Column("member_id", "uuid", {})
-	t.Column("provider", "string", {})
-	t.Column("user", "string", {})
-	t.Column("pass", "string", {})
-	t.Column("group_id", "string", {})
-	t.Column("user_id", "string", {})
-})

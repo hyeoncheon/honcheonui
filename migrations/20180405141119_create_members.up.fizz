@@ -1,4 +1,0 @@
-create_table("members", func(t) {
-	t.Column("id", "uuid", {"primary": true})
-	t.Column("email", "string", {})
-})
