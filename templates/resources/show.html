@@ -23,11 +23,21 @@
 
 <div class="row">
 	<div class="col-sm-6">
-		<h3>Ownerships</h3>
-	</div>
-	<div class="col-sm-6">
 		<h3>Linked Services</h3>
 	</div>
+	<div class="col-sm-6">
+		<h3>Ownerships</h3>
+		<div><%= for (p) in resource.Providers { %>
+			<i class="fa fa-caret-right x-list-header"></i>
+			<a href="<%= memberPath({ member_id: p.Member.ID }) %>"
+				class="mixin-normal"><i class="fa fa-user"></i> <%= p.Member %></a>
+			<a href="<%= providerPath({ provider_id: p.ID }) %>"
+				title="Group/User: <%= p.GroupID %>/<%= p.UserID %>"
+				class="mixin-normal"><i class="fa fa-link"></i> <%= p %></a><% } %>
+		</div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-sm-6">
 		<h3>Properties</h3>
 		<table class="table table-striped">

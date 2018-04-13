@@ -19,6 +19,7 @@ type Member struct {
 	Name      string    `json:"name" db:"-"`
 	Avatar    string    `json:"avatar" db:"-"`
 	Roles     []string  `json:"role" db:"-"`
+	Providers Providers `has_many:"providers" order_by:"provider"`
 }
 
 // String returns email address for the member

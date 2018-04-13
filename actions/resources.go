@@ -42,8 +42,11 @@ func (v ResourcesResource) Show(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
-	// TODO: Ownerships
-	// TODO: Linked Services
+	tx.Load(&resource.Providers, "Member")
+	/* TODO: Linked Services
+	tx.Load(&resource.Providers, "Member", "Services")
+	c.Logger().Debugf("------- providers: %v", models.JSON(resource.Providers))
+	*/
 
 	return c.Render(200, r.Auto(c, resource))
 }

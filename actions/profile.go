@@ -23,22 +23,18 @@ func ProfileSettings(c buffalo.Context) error {
 	}
 
 	currentMember := &models.Member{}
-	err := tx.Find(currentMember, c.Session().Get("member_id"))
+	err := tx.Eager().Find(currentMember, c.Session().Get("member_id"))
 	if err != nil {
 		return errors.WithStack(err)
 	}
-
-	providers := &models.Providers{}
-	if err := tx.BelongsTo(currentMember).All(providers); err != nil {
-		return errors.WithStack(err)
-	}
+	tx.Load(&currentMember.Providers, "Member")
 
 	supportedProviders := make(map[string]string)
 	for _, p := range getPluginList(c) {
 		supportedProviders[p] = p
 	}
-	c.Set("providers", providers)
-	c.Set("provider", &models.Provider{})
+	c.Set("providers", currentMember.Providers)
+	c.Set("provider", &models.Provider{}) // for modal form
 	c.Set("uart_url", os.Getenv("UART_URL"))
 	c.Set("supported_providers", supportedProviders)
 	return c.Render(200, r.HTML("profile/settings.html"))

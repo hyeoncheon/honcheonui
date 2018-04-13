@@ -16,6 +16,13 @@ add_index("providers", "member_id", {})
 add_index("providers", "group_id", {})
 add_index("providers", "user_id", {})
 
+create_table("providers_resources", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("provider_id", "uuid", {})
+	t.Column("resource_id", "uuid", {})
+})
+add_index("providers_resources", ["provider_id", "resource_id"], {"unique": true})
+
 create_table("resources", func(t) {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("provider", "string", {})
@@ -51,6 +58,7 @@ create_table("resources_users", func(t) {
 })
 add_index("resources_users", "resource_id", {})
 add_index("resources_users", "user_id", {})
+add_index("resources_users", ["resource_id", "user_id"], {"unique": true})
 
 create_table("attributes", func(t) {
 	t.Column("id", "uuid", {"primary": true})

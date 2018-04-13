@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/gobuffalo/buffalo"
@@ -29,4 +30,14 @@ func init() {
 func SetLogger(l buffalo.Logger) {
 	logger = l.WithField("category", "models")
 	slogger = logger.WithField("category", "security")
+}
+
+func inspect(desc string, data interface{}) {
+	logger.Debugf("inspect: %v: %v", desc, JSON(data))
+}
+
+// JSON returns json formatted object
+func JSON(d interface{}) string {
+	ba, _ := json.Marshal(d)
+	return string(ba)
 }

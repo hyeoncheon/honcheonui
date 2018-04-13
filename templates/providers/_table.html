@@ -12,7 +12,7 @@
 			</thead>
 			<tbody><%= for (provider) in providers { %>
 				<tr>
-					<td><%= provider.Member() %></td>
+					<td><%= provider.Member %></td>
 					<td><%= provider.Provider %></td>
 					<td><%= provider.User %></td>
 					<td><%= truncate(provider.Pass,{"size":11}) %></td>

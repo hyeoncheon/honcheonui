@@ -33,6 +33,7 @@ func (v ProvidersResource) List(c buffalo.Context) error {
 	if err := q.All(providers); err != nil {
 		return errors.WithStack(err)
 	}
+	tx.Load(providers, "Member")
 
 	c.Set("pagination", q.Paginator)
 	return c.Render(200, r.Auto(c, providers))
@@ -116,6 +117,7 @@ func (v ProvidersResource) Sync(c buffalo.Context) error {
 		return c.Render(http.StatusUnprocessableEntity, r.String("plugin error: %v", err))
 	}
 
+	var ids []uuid.UUID
 	for _, r := range resources {
 		res := &models.Resource{}
 		if jr, err := json.Marshal(r); err == nil {
@@ -134,6 +136,7 @@ func (v ProvidersResource) Sync(c buffalo.Context) error {
 			if res.UUID != uuid.Nil {
 				res.ID = res.UUID
 			}
+			ids = append(ids, res.ID)
 			if err := res.Save(); err != nil {
 				c.Logger().Errorf("saving error: %v", err)
 				c.Logger().Errorf("---- resource: %v", res.JSON())
@@ -142,15 +145,18 @@ func (v ProvidersResource) Sync(c buffalo.Context) error {
 			for k, v := range re.Attributes {
 				res.AddAttribute(k, v)
 			}
-			for _, tag := range re.Tags {
-				if err := res.LinkTag(tag); err != nil {
-					c.Logger().Errorf("could not link to tag %v: %v", tag, err)
-					c.Flash().Add("warning", t(c, "could.not.link.to.tag")+" "+tag)
-				}
+			if err := res.LinkTags(re.Tags); err != nil {
+				c.Flash().Add("warning", t(c, "problem on mapping tags"))
 			}
-			c.Logger().Debugf("------ re.UserIDs: %v", re.UserIDs)
+			if err := res.LinkUsers(re.UserIDs); err != nil {
+				c.Flash().Add("warning", t(c, "problem on mapping users"))
+			}
+			// TODO: support IntegerAttributes
 			c.Logger().Debugf("------ re.IntegerAttributes: %v", re.IntegerAttributes)
 		}
+	}
+	if err := provider.LinkResources(ids); err != nil {
+		c.Flash().Add("warning", t(c, "problem on mapping provider"))
 	}
 
 	c.Flash().Add("success", t(c, "resources.was.synced.successfully"))

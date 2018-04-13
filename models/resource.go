@@ -10,6 +10,7 @@ import (
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
 	"github.com/gobuffalo/validate/validators"
+	"github.com/hyeoncheon/honcheonui/utils"
 )
 
 // Resource is
@@ -32,6 +33,7 @@ type Resource struct {
 	IsOn               bool       `json:"is_on" db:"is_on"`
 	Tags               Tags       `many_to_many:"resources_tags"`
 	Attributes         Attributes `has_many:"attributes"`
+	Providers          Providers  `many_to_many:"providers_resources"`
 }
 
 // ResourcesTags is structure for mapping resources to tags
@@ -41,6 +43,16 @@ type ResourcesTags struct {
 	UpdatedAt  time.Time `db:"updated_at"`
 	ResourceID uuid.UUID `db:"resource_id"`
 	TagID      uuid.UUID `db:"tag_id"`
+}
+
+// ResourcesUsers is structure for mapping resources to users
+type ResourcesUsers struct {
+	ID         uuid.UUID `db:"id"`
+	CreatedAt  time.Time `db:"created_at"`
+	UpdatedAt  time.Time `db:"updated_at"`
+	ResourceID uuid.UUID `db:"resource_id"`
+	UserID     string    `db:"user_id"`
+	Provider   Provider  `belongs_to:"providers" fk_id:"user_id"`
 }
 
 // String represents its name and provider
@@ -54,8 +66,14 @@ func (r Resource) JSON() string {
 	return string(jr)
 }
 
-// Resources is array of resources
+// Resources is an array of resources
 type Resources []Resource
+
+// RTMaps is an array of resources-tags map
+type RTMaps []ResourcesTags
+
+// RUMaps is an array of resources-users map
+type RUMaps []ResourcesUsers
 
 //*** relational methods
 
@@ -73,30 +91,118 @@ func (r *Resource) AddAttribute(name, value string) error {
 	return err
 }
 
-// LinkTag links the resource to tag with given name.
-// if tag with the name does not exist, it create before linking.
-func (r *Resource) LinkTag(name string) error {
-	tag := &Tag{}
-	name = strings.TrimSpace(name)
-	err := DB.Where("name = ?", name).First(tag)
+// LinkTags makes a link map of resource and user
+func (r *Resource) LinkTags(ts []string) error {
+	tags, err := utils.ToInterface(utils.Cleaner(ts))
 	if err != nil {
-		// if cannot found, it returns error.
-		tag.Name = name
-		verrs, err := DB.ValidateAndCreate(tag)
-		if verrs.HasAny() {
-			// TODO logging
+		return errors.New("could not convert argument to interface slice")
+	}
+	logger.Debugf("link tags requested: %v", tags)
+	hasError := false
+
+	// get existing tag map and remove them from given list
+	maps := &RTMaps{}
+	if err := DB.Where("resource_id = ?", r.ID).All(maps); err != nil {
+		logger.Errorf("database selection failed! error: %v", err)
+	}
+	for _, m := range *maps {
+		tag := &Tag{}
+		err := DB.Find(tag, m.TagID)
+		if err != nil { // in case of broken link map
+			err := DB.Destroy(&m)
+			if err != nil {
+				logger.Errorf("found broken map but could not delete: id:%v", m.ID)
+			} else {
+				logger.Warnf("found broken map and deleted: id:%v", m.ID)
+			}
 		}
-		if err != nil {
-			// TODO logging
+
+		if utils.Has(tags, tag.Name) {
+			tags = utils.Remove(tags, tag.Name)
+		} else {
+			logger.Debugf("removing %v from map. no longer exists", tag.Name)
+			if err := DB.Destroy(&m); err != nil {
+				logger.Errorf("could not remove  %v from the map", m)
+				hasError = true
+			}
 		}
 	}
-	resourcesTags := &ResourcesTags{
-		ResourceID: r.ID,
-		TagID:      tag.ID,
+
+	logger.Debugf("adding new tags...: %v", tags)
+	for _, u := range tags {
+		name := strings.TrimSpace(u.(string)) //! check me
+
+		// search existing tag entry or create new one.
+		tag := &Tag{}
+		if err := DB.Where("name = ?", name).First(tag); err != nil { // if none
+			logger.Debugf("create new tag %v...", name)
+			tag.Name = name
+			verrs, err := DB.ValidateAndCreate(tag)
+			if verrs.HasAny() {
+				logger.Errorf("could not save resource-tag map %v: %v", tag, verrs)
+			}
+			if err != nil {
+				logger.Errorf("could not save resource-tag map %v: %v", tag, err)
+			}
+
+		}
+
+		logger.Debugf("creating map for %v on %v", name, r)
+		rtmap := &ResourcesTags{
+			ResourceID: r.ID,
+			TagID:      tag.ID,
+		}
+		if err := DB.Save(rtmap); err != nil {
+			logger.Errorf("could not save resource-tag map %v: %v", rtmap, err)
+			hasError = true
+		}
 	}
-	if err := DB.Save(resourcesTags); err != nil {
-		// TODO logging
-		return err
+	if hasError {
+		return errors.New("linking done with error(s)")
+	}
+	return nil
+}
+
+// LinkUsers makes a link map of resource and user
+func (r *Resource) LinkUsers(us []string) error {
+	users, err := utils.ToInterface(us)
+	if err != nil {
+		return errors.New("could not convert argument to interface slice")
+	}
+	logger.Debugf("link users requested: %v", users)
+	hasError := false
+
+	// get existing user map and remove them from given list
+	maps := &RUMaps{}
+	if err := DB.Where("resource_id = ?", r.ID).All(maps); err != nil {
+		logger.Errorf("database selection failed! error: %v", err)
+	}
+	for _, m := range *maps {
+		if utils.Has(users, m.UserID) {
+			users = utils.Remove(users, m.UserID)
+		} else {
+			logger.Debugf("removing %v from map. no longer exists", m.UserID)
+			if err := DB.Destroy(&m); err != nil {
+				logger.Errorf("could not remove user %v from the map", m)
+				hasError = true
+			}
+		}
+	}
+
+	logger.Debugf("adding new users...: %v", users)
+	for _, u := range users {
+		logger.Debugf("creating map for %v on %v", u, r)
+		rumap := &ResourcesUsers{
+			ResourceID: r.ID,
+			UserID:     u.(string), //! check me
+		}
+		if err := DB.Save(rumap); err != nil {
+			logger.Errorf("could not save resource-user map %v: %v", rumap, err)
+			hasError = true
+		}
+	}
+	if hasError {
+		return errors.New("linking done with error(s)")
 	}
 	return nil
 }
