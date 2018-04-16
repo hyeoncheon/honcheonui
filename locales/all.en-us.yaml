@@ -1,24 +1,150 @@
-# For more information on using i18n see: https://github.com/nicksnyder/go-i18n
-- id: welcome_greeting
-  translation: "Welcome to Buffalo (EN)"
+# application
 
-# authorize, login/logout, and menu items
+- id: Honcheonui
+  translation: Honcheonui
+
+# authorize, login/logout, and general menu items
 - id: "login.required"
   translation: "Login required!"
 - id: "you.have.been.successfully.logged.out"
   translation: "You have been successfully logged out."
+- id: Are you sure
+  translation: Unrecoverable. Are you sure?
 
-- id: honcheonui
-  translation: Honcheonui
-- id: profile
-  translation: Profile
-- id: settings
-  translation: Settings
-- id: logout
-  translation: Logout
-- id: dashboard
-  translation: Dashboard
-- id: services
-  translation: Services
-- id: alerts
+# profile/settings
+
+- id: See.UART.Profile
+  translation: See UART Profile
+- id: Add.New.Provider
+  translation: Add New Provider
+- id: Add.your.resource.provider
+  translation: Add your resource provider
+
+# member
+
+- id: Edit.Member
+  translation: Edit Member
+
+# resources
+
+- id: Linked Services
+  translation: Linked Services
+- id: OriginalID
+  translation: Original ID
+
+### common messages
+
+- id: Add
+  translation: Add
+- id: Admin
+  translation: Admin
+- id: Administration
+  translation: Administration
+- id: Administrator
+  translation: Administrator
+- id: Alert
+  translation: Alert
+- id: Alerts
   translation: Alerts
+- id: Attribute
+  translation: Attribute
+- id: Attributes
+  translation: Attributes
+- id: Close
+  translation: Close
+- id: Create
+  translation: Create
+- id: Created
+  translation: Created
+- id: Dashboard
+  translation: Dashboard
+- id: Delete
+  translation: Delete
+- id: Detail
+  translation: Detail
+- id: Details
+  translation: Details
+- id: Edit
+  translation: Edit
+- id: Email
+  translation: Email
+- id: GroupID
+  translation: Group ID
+- id: ID
+  translation: ID
+- id: IP Address
+  translation: IP Address
+- id: IP Addresses
+  translation: IP Addresses
+- id: Location
+  translation: Location
+- id: Login
+  translation: Login
+- id: Logout
+  translation: Logout
+- id: Mail
+  translation: Mail
+- id: Member
+  translation: Member
+- id: Members
+  translation: Members
+- id: Modify
+  translation: Modify
+- id: Modified
+  translation: Modified
+- id: Name
+  translation: Name
+- id: Note
+  translation: Note
+- id: Notes
+  translation: Notes
+- id: Ownership
+  translation: Ownership
+- id: Ownerships
+  translation: Ownerships
+- id: Password
+  translation: Password
+- id: Profile
+  translation: Profile
+- id: Provider
+  translation: Provider
+- id: Providers
+  translation: Providers
+- id: Register
+  translation: Register
+- id: Registered
+  translation: Registered
+- id: Resource
+  translation: Resource
+- id: Resources
+  translation: Resources
+- id: Role
+  translation: Role
+- id: Roles
+  translation: Roles
+- id: Service
+  translation: Service
+- id: Services
+  translation: Services
+- id: Settings
+  translation: Settings
+- id: Sync
+  translation: Sync
+- id: Tag
+  translation: Tag
+- id: Tags
+  translation: Tags
+- id: Type
+  translation: Type
+- id: Update
+  translation: Update
+- id: Updates
+  translation: Updates
+- id: Updated
+  translation: Updated
+- id: User
+  translation: User
+- id: Users
+  translation: Users
+- id: UserID
+  translation: User ID

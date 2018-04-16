@@ -1,3 +1,3 @@
-<%= f.SelectTag("Provider", {options: supported_providers}) %>
-<%= f.InputTag("User") %>
-<%= f.InputTag("Pass") %>
+<%= f.SelectTag("Provider", {options: supported_providers, label:t("Provider")}) %>
+<%= f.InputTag("User", {label:t("User")}) %>
+<%= f.InputTag("Pass", {label:t("Password")}) %>

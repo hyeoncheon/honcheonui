@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title><%= t("honcheonui") %></title>
+		<title><%= t("Honcheonui") %></title>
 		<%= stylesheetTag("application.css") %>
 		<%= stylesheetTag("epoxy.css") %>
 		<%= stylesheetTag("overrides.css") %>
@@ -21,7 +21,7 @@
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<span class="navbar-brand push_menu fa fa-bars"></span>
-						<a href="/" class="navbar-brand"><%= t("honcheonui") %></a>
+						<a href="/" class="navbar-brand"><%= t("Honcheonui") %></a>
 					</div><%= if (member_id) { %>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -31,9 +31,9 @@
 							<ul class="dropdown-menu dropdown-block menu" role="menu">
 								<li><span><%= member_name %></span></li>
 								<li><span>ID: <%= truncate(member_id,{"size":11}) %></span></li>
-								<li><a href="/profile"><%= t("profile") %></a></li>
-								<li><a href="/settings"><%= t("settings") %></a></li>
-								<li><a href="/logout"><%= t("logout") %></a></li>
+								<li><a href="/profile"><%= t("Profile") %></a></li>
+								<li><a href="/settings"><%= t("Settings") %></a></li>
+								<li><a href="/logout"><%= t("Logout") %></a></li>
 							</ul>
 						</li>
 					</ul><% } %>
@@ -62,39 +62,39 @@
 					-->
 					<div class="menu">
 						<li>
-							<a href="/"><%= t("dashboard") %> <span
+							<a href="/"><%= t("Dashboard") %> <span
 									class="fa fa-tachometer pull-right"></span></a>
 						</li>
 						<li class="active">
-							<a href="/services"><%= t("services") %> <span
+							<a href="/services"><%= t("Services") %> <span
 									class="fa fa-asterisk pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/alerts"><%= t("alerts") %> <span
+							<a href="/alerts"><%= t("Alerts") %> <span
 									class="fa fa-bell pull-right"></span></a>
 						</li>
 						<li>
-							<a href="/settings"><%= t("settings") %> <span
+							<a href="/settings"><%= t("Settings") %> <span
 									class="fa fa-cog pull-right"></span></a>
 						</li><%= if (has(member_roles, "admin")) { %>
 						<li class="admin">
-							<a href="/members"><%= t("members") %> <span
+							<a href="/members"><%= t("Members") %> <span
 									class="fa fa-users pull-right"></span></a>
 						</li>
 						<li class="admin">
-							<a href="/providers"><%= t("providers") %> <span
+							<a href="/providers"><%= t("Providers") %> <span
 									class="fa fa-link pull-right"></span></a>
 						</li>
 						<li class="admin">
-							<a href="/resources"><%= t("resources") %> <span
+							<a href="/resources"><%= t("Resources") %> <span
 									class="fa fa-server pull-right"></span></a>
 						</li>
 						<li class="admin">
-							<a href="/tags"><%= t("tags") %> <span
+							<a href="/tags"><%= t("Tags") %> <span
 									class="fa fa-tags pull-right"></span></a>
 						</li>
 						<li class="admin">
-							<a href="/admin"><%= t("admin") %> <span
+							<a href="/admin"><%= t("Admin") %> <span
 									class="fa fa-empire pull-right"></span></a>
 						</li><% } %>
 					</div>

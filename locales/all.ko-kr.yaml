@@ -1,24 +1,150 @@
-# For more information on using i18n see: https://github.com/nicksnyder/go-i18n
-- id: welcome_greeting
-  translation: "Welcome to Buffalo (EN)"
+# application
+
+- id: Honcheonui
+  translation: 혼천의
 
 # authorize, login/logout, and menu items
 - id: "login.required"
   translation: "로그인 해야합니다!"
 - id: "you.have.been.successfully.logged.out"
   translation: "안전하게 로그아웃 되었습니다."
+- id: Are you sure
+  translation: 되돌릴 수 없습니다. 계속하시겠습니까?
 
-- id: honcheonui
-  translation: 혼천의
-- id: profile
-  translation: 프로필
-- id: settings
-  translation: 설정
-- id: logout
-  translation: 로그아웃
-- id: dashboard
-  translation: 현황판
-- id: services
-  translation: 서비스
-- id: alerts
+# profile/settings
+
+- id: See.UART.Profile
+  translation: UART 프로필 보기
+- id: Add.New.Provider
+  translation: 새 제공자 추가
+- id: Add.your.resource.provider
+  translation: 자원 제공자를 추가합니다.
+
+# member
+
+- id: Edit.Member
+  translation: 회원 수정
+
+# resources
+
+- id: Linked Services
+  translation: 연결된 서비스
+- id: OriginalID
+  translation: 원본 ID
+
+### common messages
+
+- id: Add
+  translation: 추가
+- id: Admin
+  translation: 관리
+- id: Administration
+  translation: 관리
+- id: Administrator
+  translation: 관리자
+- id: Alert
   translation: 경보
+- id: Alerts
+  translation: 경보
+- id: Attribute
+  translation: 속성
+- id: Attributes
+  translation: 속성
+- id: Close
+  translation: 닫기
+- id: Create
+  translation: 생성
+- id: Created
+  translation: 생성됨
+- id: Dashboard
+  translation: 현황판
+- id: Delete
+  translation: 삭제
+- id: Detail
+  translation: 상세
+- id: Details
+  translation: 상세
+- id: Edit
+  translation: 편집
+- id: Email
+  translation: 메일
+- id: GroupID
+  translation: 그룹 ID
+- id: ID
+  translation: ID
+- id: IP Address
+  translation: IP 주소
+- id: IP Addresses
+  translation: IP 주소
+- id: Location
+  translation: 위치
+- id: Login
+  translation: 로그인
+- id: Logout
+  translation: 로그아웃
+- id: Mail
+  translation: 메일
+- id: Member
+  translation: 회원
+- id: Members
+  translation: 회원
+- id: Modify
+  translation: 변경
+- id: Modified
+  translation: 변경됨
+- id: Name
+  translation: 이름
+- id: Note
+  translation: 노트
+- id: Notes
+  translation: 노트
+- id: Ownership
+  translation: 소유권
+- id: Ownerships
+  translation: 소유권
+- id: Password
+  translation: 암호
+- id: Profile
+  translation: 프로필
+- id: Provider
+  translation: 제공자
+- id: Providers
+  translation: 제공자
+- id: Register
+  translation: 등록
+- id: Registered
+  translation: 등록됨
+- id: Resource
+  translation: 자원
+- id: Resources
+  translation: 자원
+- id: Role
+  translation: 역할
+- id: Roles
+  translation: 역할
+- id: Service
+  translation: 서비스
+- id: Services
+  translation: 서비스
+- id: Settings
+  translation: 설정
+- id: Sync
+  translation: 동기화
+- id: Tag
+  translation: 태그
+- id: Tags
+  translation: 태그
+- id: Type
+  translation: 유형
+- id: Update
+  translation: 갱신
+- id: Updates
+  translation: 갱신
+- id: Updated
+  translation: 갱신됨
+- id: User
+  translation: 사용자
+- id: Users
+  translation: 사용자
+- id: UserID
+  translation: 사용자 ID

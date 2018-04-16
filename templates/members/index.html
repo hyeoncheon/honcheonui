@@ -1,29 +1,28 @@
 <div class="page-header">
-	<h1>Members</h1>
+	<h1><%= t("Members") %></h1>
 </div>
 
 <div class="page-content">
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Email</th>
+				<th><%= t("ID") %></th>
+				<th><%= t("Email") %></th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody><%= for (member) in members { %>
 			<tr>
-				<td><%= member.ID %></td>
+				<td><a href="<%= memberPath({ member_id: member.ID })
+						%>"><%= member.ID %></a></td>
 				<td><%= member.Email %></td>
 				<td>
-					<div class="pull-right">
-						<a href="<%= memberPath({ member_id: member.ID }) %>"
-							class="btn btn-xs btn-info">View</a>
-						<a href="<%= editMemberPath({ member_id: member.ID }) %>"
-							class="btn btn-xs btn-warning">Edit</a>
-						<a href="<%= memberPath({ member_id: member.ID }) %>"
-							data-method="DELETE" data-confirm="Are you sure?"
-							class="btn btn-xs btn-danger">Destroy</a>
+					<div class="pull-right btn-group">
+						<a href="<%= editMemberPath({ member_id: member.ID })
+							%>" class="btn btn-xs btn-warning"><%= t("Edit") %></a>
+						<a href="<%= memberPath({ member_id: member.ID })
+							%>" data-method="DELETE" data-confirm="<%= t("Are you sure")
+							%>" class="btn btn-xs btn-danger"><%= t("Delete") %></a>
 					</div>
 				</td>
 			</tr><% } %>

@@ -1,12 +1,12 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Member</th>
-					<th>Provider</th>
-					<th>User</th>
-					<th>Pass</th>
-					<th>GroupID</th>
-					<th>UserID</th>
+					<th><%= t("Member") %></th>
+					<th><%= t("Provider") %></th>
+					<th><%= t("User") %></th>
+					<th><%= t("Password") %></th>
+					<th><%= t("GroupID") %></th>
+					<th><%= t("UserID") %></th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
@@ -21,10 +21,10 @@
 					<td>
 						<div class="pull-right btn-group mixin-nobreak">
 							<a href="<%= providerSyncPath({ provider_id: provider.ID }) %>"
-								class="btn btn-xs btn-default">Sync</a>
+								class="btn btn-xs btn-default"><%= t("Sync") %></a>
 							<a href="<%= providerPath({ provider_id: provider.ID }) %>"
-								data-method="DELETE" data-confirm="Are you sure?"
-								class="btn btn-xs btn-danger">Destroy</a>
+								data-method="DELETE" data-confirm="<%= t("Are you sure")
+								%>" class="btn btn-xs btn-danger"><%= t("Delete") %></a>
 						</div>
 					</td>
 				</tr>

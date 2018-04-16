@@ -1,10 +1,14 @@
 $color-border: #ccc;
 
+$color-text: #303030;
+$color-matt: #f9f9f9;
+
 /* mixins */
 .mixin-strong { font-weight: 600; }
 .mixin-green { color: green; }
 .mixin-red { color: red; }
 .mixin-orange { color: orange; }
+.mixin-normal { color: $color-text; }
 
 /* override default styles of bootstrap */
 
@@ -28,6 +32,7 @@ $color-border: #ccc;
 	& > tfoot > tr > th {
 		padding: 2px 6px;
 		border-top: 1px solid $color-border;
+		font-weight: normal;
 	}
 }
 

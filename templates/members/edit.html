@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h1>Edit Member</h1>
+	<h1><%= t("Edit.Member") %></h1>
 </div>
 
 <%= form_for(member, {action: memberPath({ member_id: member.ID }),
@@ -9,7 +9,8 @@
 	</div>
 	<div class="page-tail pull-right">
 		<button class="btn btn-success" role="submit">Save</button>
-		<a href="<%= memberPath({ member_id: member.ID }) %>"
-			class="btn btn-warning" data-confirm="Are you sure?">Cancel</a>
+		<a href="<%= memberPath({ member_id: member.ID })
+			%>" class="btn btn-warning" data-confirm="<%= t("Are you sure")
+			%>"><%= t("cancel") %></a>
 	</div>
 <% } %>
