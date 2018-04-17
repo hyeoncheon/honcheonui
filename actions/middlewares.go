@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/uuid"
 )
 
 // AuthorizeHandler protect all application pages from unauthorized accesses.
@@ -26,9 +25,7 @@ func contextHandler(next buffalo.Handler) buffalo.Handler {
 		c.Set("TIME_FORMAT", "2006-01-02T15:04:05Z07:00")
 		memberID := c.Session().Get("member_id")
 		if memberID != nil {
-			if id, ok := memberID.(uuid.UUID); ok {
-				c.Set("member_id", id.String())
-			}
+			c.Set("member_id", memberID)
 			c.Set("member_mail", c.Session().Get("member_mail"))
 			c.Set("member_name", c.Session().Get("member_name"))
 			c.Set("member_icon", c.Session().Get("member_icon"))

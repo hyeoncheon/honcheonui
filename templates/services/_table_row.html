@@ -1,0 +1,15 @@
+		<tr>
+			<td><%= service.Member %></td>
+			<td><a href="<%= servicePath({ service_id: service.ID })
+				%>"><%= service.Name %></a></td>
+			<td><%= service.Description %></td>
+			<td>
+				<div class="pull-right btn-group">
+					<a href="<%= editServicePath({ service_id: service.ID })
+						%>" class="btn btn-xs btn-warning"><%= t("Edit") %></a>
+					<a href="<%= servicePath({ service_id: service.ID })
+						%>" data-method="DELETE" data-confirm="<%= t("Are you sure")
+						%>" class="btn btn-xs btn-danger"><%= t("Delete") %></a>
+				</div>
+			</td>
+		</tr>

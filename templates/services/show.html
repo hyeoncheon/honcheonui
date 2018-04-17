@@ -1,0 +1,111 @@
+<div class="page-header">
+	<h1><%= t("Service") %>: <%= service.Name %></h1>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= t("Member") %></th>
+			<th><%= t("Name") %></th>
+			<th><%= t("Description") %></th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+<%= partial("services/table_row.html") %>
+	</tbody>
+</table>
+
+<h3><%= t("Description") %></h3>
+<div class="description"><%= service.Description %></div>
+
+<div class="row">
+	<div class="col-sm-6">
+		<h3><%= t("Alerts") %></h3>
+	</div>
+	<div class="col-sm-6">
+		<h3><%= t("Tags") %> (<%= if (service.MatchAll) {
+			%><%= t("Match.All") %><% } else {
+			%><%= t("Match.Any") %><% } %>)</h3>
+		<div><%= for (tag) in service.Tags { %>
+			<a class="x-tag"><i class="fa fa-tag"></i> <%= tag.Name %></a> <% } %>
+		</div>
+		<div class="pull-right">
+			<a class="btn btn-xs btn-default"
+			data-toggle="modal" data-target="#newTags"><%= t("Link.Tags")%></a>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<h3><%= t("Linked.Resources") %></h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= t("Name") %></th>
+					<th><%= t("IPAddress") %></th>
+					<th><%= t("Registered") %></th>
+					<th><%= t("Updated") %></th>
+					<th><%= t("Modified") %></th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody><%= for (resource) in resources { %>
+<%= partial("resources/table_row.html") %><% } %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Modal for Tags -->
+<div class="modal fade" id="newTags" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><%=t("Link.Tags")%></h4>
+			</div>
+			<%= form_for(service,
+			{action: "", method: "POST", id: "newTagsForm", class: "horizontal"}) { %>
+			<div class="modal-body">
+				<p><%=t("Link.tags.with.this.service")%></p>
+				<p id="modal-error" class="alert alert-danger hide"></p>
+				<div><%= for (tag) in tags { %>
+					<div class="checkbox">
+						<label><input type="checkbox" id="tag" name="tag_id" value="<%=
+							tag.ID %>"><%= tag.Name %></label>
+					</div><% } %>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" data-dismiss="modal"
+					aria-label="Close"><%=t("Close")%></button>
+				<span id="submit" class="btn btn-success"><%=t("Add")%></span>
+			</div>
+			<% } %>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#submit").click(function() {
+		var formData = $("#newTagsForm").serialize();
+		$.ajax({
+			type: "POST",
+			url: "<%= serviceAddTagsPath({service_id: service.ID}) %>",
+			cache: false,
+			data: formData,
+			success: function(json, status) {
+				$('#newTags').modal('hide');
+				location.reload();
+			},
+			error: function(data, status) {
+				$("#modal-error").removeClass("hide");
+				$("#modal-error").text(data.responseText);
+			}
+		});
+	});
+});
+</script>

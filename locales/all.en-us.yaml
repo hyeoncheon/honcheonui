@@ -32,6 +32,27 @@
 - id: OriginalID
   translation: Original ID
 
+# services
+
+- id: Add.New.Service
+  translation: Add New Service
+- id: Edit.Service
+  translation: Edit Service
+- id: Link.Tags
+  translation: Link Tags
+- id: Linked.Resources
+  translation: Linked Resources
+- id: Matching.Rule
+  translation: Matching Rule
+- id: All.Tags
+  translation: All Tags
+- id: Any.Tags
+  translation: Any Tags
+- id: Match.All
+  translation: Match All
+- id: Match.Any
+  translation: Match Any
+
 ### common messages
 
 - id: Add
@@ -50,6 +71,8 @@
   translation: Attribute
 - id: Attributes
   translation: Attributes
+- id: Cancel
+  translation: Cancel
 - id: Close
   translation: Close
 - id: Create
@@ -60,6 +83,8 @@
   translation: Dashboard
 - id: Delete
   translation: Delete
+- id: Description
+  translation: Description
 - id: Detail
   translation: Detail
 - id: Details
@@ -122,6 +147,8 @@
   translation: Role
 - id: Roles
   translation: Roles
+- id: Save
+  translation: Save
 - id: Service
   translation: Service
 - id: Services

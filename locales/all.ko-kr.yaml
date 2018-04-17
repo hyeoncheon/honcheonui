@@ -32,6 +32,27 @@
 - id: OriginalID
   translation: 원본 ID
 
+# services
+
+- id: Add.New.Service
+  translation: 새 서비스 추가
+- id: Edit.Service
+  translation: 서비스 수정
+- id: Link.Tags
+  translation: 태그 연결
+- id: Linked.Resources
+  translation: 연결된 자원
+- id: Matching.Rule
+  translation: 선택 규칙
+- id: All.Tags
+  translation: 모든 태그
+- id: Any.Tags
+  translation: 일부 태그
+- id: Match.All
+  translation: 모두 일치
+- id: Match.Any
+  translation: 일부 일치
+
 ### common messages
 
 - id: Add
@@ -50,6 +71,8 @@
   translation: 속성
 - id: Attributes
   translation: 속성
+- id: Cancel
+  translation: 취소
 - id: Close
   translation: 닫기
 - id: Create
@@ -60,6 +83,8 @@
   translation: 현황판
 - id: Delete
   translation: 삭제
+- id: Description
+  translation: 설명
 - id: Detail
   translation: 상세
 - id: Details
@@ -122,6 +147,8 @@
   translation: 역할
 - id: Roles
   translation: 역할
+- id: Save
+  translation: 저장
 - id: Service
   translation: 서비스
 - id: Services

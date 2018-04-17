@@ -81,6 +81,8 @@ func App() *buffalo.App {
 		app.GET("/resources/{resource_id}", ResourcesResource{}.Show)
 		app.GET("/resources/{resource_id}/sync", ResourcesResource{}.Update)
 		app.DELETE("/resources/{resource_id}", ResourcesResource{}.Destroy)
+		app.Resource("/services", ServicesResource{})
+		app.POST("/services/{service_id}/add_tags", ServicesResource{}.AddTags)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

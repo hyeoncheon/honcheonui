@@ -167,6 +167,11 @@ a.x-tag,
 .x-list-header {
 	padding-right: 10px;
 }
+.description {
+	margin-left: 5px;
+	border-left: 5px solid $color-matt - #222;
+	padding-left: 10px;
+}
 
 // ---- style: sidebar
 .side-bar {

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
+	"github.com/gobuffalo/uuid"
 	"github.com/pkg/errors"
 
 	"github.com/hyeoncheon/honcheonui/models"
@@ -38,4 +39,12 @@ func ProfileSettings(c buffalo.Context) error {
 	c.Set("uart_url", os.Getenv("UART_URL"))
 	c.Set("supported_providers", supportedProviders)
 	return c.Render(200, r.HTML("profile/settings.html"))
+}
+
+func effectiveMember(c buffalo.Context) *models.Member {
+	dummy := &models.Member{}
+	if id, ok := c.Value("member_id").(uuid.UUID); ok {
+		dummy.ID = id
+	}
+	return dummy
 }

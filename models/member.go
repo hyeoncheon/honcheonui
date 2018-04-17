@@ -35,6 +35,39 @@ func (m Members) String() string {
 	return strconv.Itoa(len(m))
 }
 
+//*** relational operations and queries
+
+// GroupTags gets and returns all accessible tags
+func (m *Member) GroupTags() *Tags {
+	tags := &Tags{}
+
+	// get all tags for same group_id not just mine.
+	// NOTE: I am not sure which is performing better even though plan for
+	// join is shorter. Anyway, buffalo/pop's query builder support join :-)
+	query := DB.Q().
+		Join("resources_tags", "resources_tags.tag_id = tags.id").
+		Join("resources", "resources.id = resources_tags.resource_id").
+		Join("providers", "providers.group_id = resources.group_id").
+		Where("providers.member_id = ?", m.ID).
+		GroupBy("tags.id").Order("tags.name")
+	/*
+		query := DB.RawQuery(`SELECT tags.id, tags.name FROM tags WHERE id IN (
+				SELECT tag_id FROM resources_tags WHERE resource_id IN (
+					SELECT id FROM resources WHERE group_id IN (
+						SELECT group_id FROM providers WHERE member_id = ?
+					)
+				)
+			) ORDER BY tags.name`, m.ID)
+	*/
+	err := query.All(tags)
+	if err != nil {
+		logger.Errorf("get all tags error: %v", err)
+	}
+	return tags
+}
+
+//*** validators
+
 // Validate gets run every time you call a "pop.Validate*" method.
 func (m *Member) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(

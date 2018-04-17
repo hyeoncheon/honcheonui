@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h1><%= t("Add.New.Service") %></h1>
+</div>
+
+<%= form_for(service, {action: servicesPath(),
+	method: "POST", class: "horizontal"}) { %>
+	<%= partial("services/form.html") %>
+	<div class="buttons">
+		<button class="btn btn-xs btn-success" role="submit"><%= t("Save")
+			%></button>
+		<a href="<%= servicesPath()
+			%>" class="btn btn-xs btn-warning" data-confirm="<%= t("Are you sure")
+			%>"><%= t("Cancel") %></a>
+	</div>
+<% } %>

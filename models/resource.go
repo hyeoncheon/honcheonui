@@ -144,7 +144,6 @@ func (r *Resource) LinkTags(ts []string) error {
 			if err != nil {
 				logger.Errorf("could not save resource-tag map %v: %v", tag, err)
 			}
-
 		}
 
 		logger.Debugf("creating map for %v on %v", name, r)

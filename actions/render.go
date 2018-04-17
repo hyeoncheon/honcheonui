@@ -5,6 +5,7 @@ import (
 
 	"github.com/gobuffalo/buffalo/render"
 	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/uuid"
 	"github.com/markbates/inflect"
 )
 
@@ -48,6 +49,12 @@ func init() {
 					}
 				}
 				return false
+			},
+			"uuidTrucate": func(u uuid.UUID, l ...int) string {
+				if len(l) > 0 {
+					return u.String()[0:l[0]]
+				}
+				return u.String()
 			},
 		},
 	})

@@ -1,0 +1,19 @@
+<%= f.InputTag("Name", {label: t("Name")}) %>
+<%= f.InputTag("Description", {label: t("Description")}) %>
+<div class="form-group">
+	<label><%= t("Matching.Rule") %></label>
+	<div class="widget-group">
+		<div class="radio-inline abc-radio abc-radio-info">
+			<input name="MatchAll" id="match-all-true" type="radio"<%=
+				if (service.MatchAll) { %> checked="true"<% }
+				%> value="true"><label for="match-all-true"><%= t("All.Tags")
+				%></label>
+		</div>
+		<div class="radio-inline abc-radio abc-radio-info">
+			<input name="MatchAll" id="match-all-false" type="radio"<%=
+				if (!service.MatchAll) { %> checked="true"<% }
+				%> value="false"><label for="match-all-false"><%= t("Any.Tags")
+				%></label>
+		</div>
+	</div>
+</div>

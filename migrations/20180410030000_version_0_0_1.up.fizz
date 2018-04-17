@@ -1,3 +1,4 @@
+
 create_table("members", func(t) {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("email", "string", {})
@@ -74,3 +75,25 @@ create_table("tags", func(t) {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("name", "string", {})
 })
+
+create_table("services", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("member_id", "uuid", {})
+	t.Column("name", "string", {})
+	t.Column("description", "string", {})
+	t.Column("match_all", "bool", {"default": true})
+})
+
+create_table("services_resources", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("service_id", "uuid", {})
+	t.Column("resource_id", "string", {})
+})
+add_index("services_resources", ["service_id", "resource_id"], {"unique": true})
+
+create_table("services_tags", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("service_id", "uuid", {})
+	t.Column("tag_id", "string", {})
+})
+add_index("services_tags", ["service_id", "tag_id"], {"unique": true})

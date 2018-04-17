@@ -30,7 +30,7 @@
 								class="img-responsive img-thumbnail img-circle"></a>
 							<ul class="dropdown-menu dropdown-block menu" role="menu">
 								<li><span><%= member_name %></span></li>
-								<li><span>ID: <%= truncate(member_id,{"size":11}) %></span></li>
+								<li><span>ID: <%= uuidTrucate(member_id, 8) %></span></li>
 								<li><a href="/profile"><%= t("Profile") %></a></li>
 								<li><a href="/settings"><%= t("Settings") %></a></li>
 								<li><a href="/logout"><%= t("Logout") %></a></li>
