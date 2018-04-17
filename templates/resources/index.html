@@ -1,23 +1,29 @@
 <div class="page-header">
 	<h1><%= t("Resources") %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"><%= len(resources) %></div>
 </div>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th><%= t("Name") %></th>
-			<th><%= t("IP Address") %></th>
-			<th><%= t("Registered") %></th>
-			<th><%= t("Updated") %></th>
-			<th><%= t("Modified") %></th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody><%= for (resource) in resources { %>
+<div class="page-content">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><%= t("Name") %></th>
+				<th><%= t("IP.Address") %></th>
+				<th><%= t("Registered") %></th>
+				<th><%= t("Updated") %></th>
+				<th><%= t("Modified") %></th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody><%= for (resource) in resources { %>
 <%= partial("resources/table_row.html") %><% } %>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
 
-<div class="text-center">
+<div class="page-tail text-center">
 	<%= paginator(pagination) %>
 </div>

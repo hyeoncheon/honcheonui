@@ -1,16 +1,25 @@
 <div class="page-header">
 	<h1><%= t("Edit.Member") %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"><%= member %></div>
 </div>
 
+<div class="page-content">
 <%= form_for(member, {action: memberPath({ member_id: member.ID }),
 	method: "PUT", class: "horizontal"}) { %>
 	<div class="page-content">
 	<%= partial("members/form.html") %>
 	</div>
-	<div class="page-tail pull-right">
-		<button class="btn btn-success" role="submit">Save</button>
+	<div class="buttons">
+		<button class="btn btn-sm btn-success" role="submit">Save</button>
 		<a href="<%= memberPath({ member_id: member.ID })
-			%>" class="btn btn-warning" data-confirm="<%= t("Are you sure")
+			%>" class="btn btn-sm btn-warning" data-confirm="<%= t("Are you sure")
 			%>"><%= t("cancel") %></a>
 	</div>
 <% } %>
+</div>
+
+<div class="page-tail pull-right">
+</div>

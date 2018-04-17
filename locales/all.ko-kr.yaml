@@ -27,7 +27,7 @@
 
 # resources
 
-- id: Linked Services
+- id: Linked.Services
   translation: 연결된 서비스
 - id: OriginalID
   translation: 원본 ID
@@ -38,8 +38,14 @@
   translation: 새 서비스 추가
 - id: Edit.Service
   translation: 서비스 수정
+- id: Recent.Events
+  translation: 최근 이벤트
+- id: Add.Alert
+  translation: 경보 추가
 - id: Link.Tags
   translation: 태그 연결
+- id: Select.tags.to.be.linked.with.this.service
+  translation: 이 서비스에 연결할 태그를 선택하세요.
 - id: Linked.Resources
   translation: 연결된 자원
 - id: Matching.Rule
@@ -52,6 +58,13 @@
   translation: 모두 일치
 - id: Match.Any
   translation: 일부 일치
+
+# events
+
+- id: Open.Events
+  translation: 열린 이벤트
+- id: Recent.Events
+  translation: 최근 이벤트
 
 ### common messages
 
@@ -91,15 +104,19 @@
   translation: 상세
 - id: Edit
   translation: 편집
+- id: Event
+  translation: 이벤트
+- id: Events
+  translation: 이벤트
 - id: Email
   translation: 메일
 - id: GroupID
   translation: 그룹 ID
 - id: ID
   translation: ID
-- id: IP Address
+- id: IP.Address
   translation: IP 주소
-- id: IP Addresses
+- id: IP.Addresses
   translation: IP 주소
 - id: Location
   translation: 위치

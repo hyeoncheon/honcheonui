@@ -1,13 +1,15 @@
 <div class="page-header">
-	<h1><%= t("Member") %></h1>
+	<h1><%= t("Member") %>: <%= member %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"><%= member.ID %></div>
 </div>
 
 <div class="page-content">
-	<p><strong><%= t("ID") %></strong>: <%= member.ID %></p>
-	<p><strong><%= t("Email") %></strong>: <%= member.Email %></p>
 </div>
 
 <div class="page-tail pull-right">
 	<a href="<%= editMemberPath({ member_id: member.ID })
-		%>" class="btn btn-default"><%= t("edit") %></a>
+		%>" class="btn btn-sm btn-default"><%= t("edit") %></a>
 </div>

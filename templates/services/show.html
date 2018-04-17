@@ -1,61 +1,67 @@
 <div class="page-header">
 	<h1><%= t("Service") %>: <%= service.Name %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"><%= service.Description %></div>
 </div>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th><%= t("Member") %></th>
-			<th><%= t("Name") %></th>
-			<th><%= t("Description") %></th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody>
-<%= partial("services/table_row.html") %>
-	</tbody>
-</table>
-
-<h3><%= t("Description") %></h3>
-<div class="description"><%= service.Description %></div>
-
-<div class="row">
-	<div class="col-sm-6">
-		<h3><%= t("Alerts") %></h3>
-	</div>
-	<div class="col-sm-6">
-		<h3><%= t("Tags") %> (<%= if (service.MatchAll) {
-			%><%= t("Match.All") %><% } else {
-			%><%= t("Match.Any") %><% } %>)</h3>
-		<div><%= for (tag) in service.Tags { %>
-			<a class="x-tag"><i class="fa fa-tag"></i> <%= tag.Name %></a> <% } %>
-		</div>
-		<div class="pull-right">
-			<a class="btn btn-xs btn-default"
-			data-toggle="modal" data-target="#newTags"><%= t("Link.Tags")%></a>
+<div class="page-content">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3><%= t("Recent.Events") %></h3>
+			<div>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-		<h3><%= t("Linked.Resources") %></h3>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th><%= t("Name") %></th>
-					<th><%= t("IPAddress") %></th>
-					<th><%= t("Registered") %></th>
-					<th><%= t("Updated") %></th>
-					<th><%= t("Modified") %></th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
-			<tbody><%= for (resource) in resources { %>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h3><%= t("Alerts") %></h3>
+			<div class="pull-right">
+				<a class="btn btn-sm btn-default"
+				data-toggle="modal" data-target="#newTags"><%= t("Add.Alert")%></a>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h3><%= t("Tags") %> (<%= if (service.MatchAll) {
+				%><%= t("Match.All") %><% } else {
+				%><%= t("Match.Any") %><% } %>)</h3>
+			<div class="pull-right">
+				<a class="btn btn-sm btn-default"
+				data-toggle="modal" data-target="#newTags"><%= t("Link.Tags")%></a>
+			</div>
+			<div><%= for (tag) in service.Tags { %>
+				<a class="x-tag"><i class="fa fa-tag"></i> <%= tag.Name %></a> <% } %>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h3><%= t("Linked.Resources") %></h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= t("Name") %></th>
+						<th><%= t("IP.Address") %></th>
+						<th><%= t("Registered") %></th>
+						<th><%= t("Updated") %></th>
+						<th><%= t("Modified") %></th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody><%= for (resource) in resources { %>
 <%= partial("resources/table_row.html") %><% } %>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
+
+<div class="page-tail pull-right">
+</div>
+
+<!-- modal zone -->
 
 <!-- Modal for Tags -->
 <div class="modal fade" id="newTags" tabindex="-1" role="dialog">
@@ -70,7 +76,7 @@
 			<%= form_for(service,
 			{action: "", method: "POST", id: "newTagsForm", class: "horizontal"}) { %>
 			<div class="modal-body">
-				<p><%=t("Link.tags.with.this.service")%></p>
+				<p><%=t("Select.tags.to.be.linked.with.this.service")%></p>
 				<p id="modal-error" class="alert alert-danger hide"></p>
 				<div><%= for (tag) in tags { %>
 					<div class="checkbox">

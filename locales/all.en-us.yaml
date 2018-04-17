@@ -27,7 +27,7 @@
 
 # resources
 
-- id: Linked Services
+- id: Linked.Services
   translation: Linked Services
 - id: OriginalID
   translation: Original ID
@@ -38,8 +38,12 @@
   translation: Add New Service
 - id: Edit.Service
   translation: Edit Service
+- id: Add.Alert
+  translation: Add Alert
 - id: Link.Tags
   translation: Link Tags
+- id: Select.tags.to.be.linked.with.this.service
+  translation: Select tags to be linked with this service.
 - id: Linked.Resources
   translation: Linked Resources
 - id: Matching.Rule
@@ -52,6 +56,13 @@
   translation: Match All
 - id: Match.Any
   translation: Match Any
+
+# events
+
+- id: Open.Events
+  translation: Open Events
+- id: Recent.Events
+  translation: Recent Events
 
 ### common messages
 
@@ -93,13 +104,17 @@
   translation: Edit
 - id: Email
   translation: Email
+- id: Event
+  translation: Event
+- id: Events
+  translation: Events
 - id: GroupID
   translation: Group ID
 - id: ID
   translation: ID
-- id: IP Address
+- id: IP.Address
   translation: IP Address
-- id: IP Addresses
+- id: IP.Addresses
   translation: IP Addresses
 - id: Location
   translation: Location

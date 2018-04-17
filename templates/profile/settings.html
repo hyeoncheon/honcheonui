@@ -1,5 +1,9 @@
 <div class="page-header">
 	<h1><%= t("Settings") %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"><%= member_id %></div>
 </div>
 
 <div class="page-content row">
@@ -7,7 +11,7 @@
 		<%= partial("profile/profile.html") %>
 		<div class="pull-right">
 			<a href="<%= uart_url %>/membership/me"
-				class="btn btn-xs btn-default"><%= t("See.UART.Profile") %></a>
+				class="btn btn-sm btn-default"><%= t("See.UART.Profile") %></a>
 		</div>
 	</div>
 
@@ -15,7 +19,7 @@
 		<h2><%= t("Providers") %></h2>
 		<%= partial("providers/table.html") %>
 		<div class="pull-right">
-			<a class="btn btn-xs btn-default"
+			<a class="btn btn-sm btn-default"
 				data-toggle="modal" data-target="#newProvider"><%=
 				t("Add.New.Provider")%></a>
 		</div>

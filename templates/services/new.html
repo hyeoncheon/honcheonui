@@ -1,15 +1,24 @@
 <div class="page-header">
 	<h1><%= t("Add.New.Service") %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description">description here</div>
 </div>
 
-<%= form_for(service, {action: servicesPath(),
-	method: "POST", class: "horizontal"}) { %>
-	<%= partial("services/form.html") %>
-	<div class="buttons">
-		<button class="btn btn-xs btn-success" role="submit"><%= t("Save")
-			%></button>
-		<a href="<%= servicesPath()
-			%>" class="btn btn-xs btn-warning" data-confirm="<%= t("Are you sure")
-			%>"><%= t("Cancel") %></a>
-	</div>
-<% } %>
+<div class="page-content">
+	<%= form_for(service, {action: servicesPath(),
+		method: "POST", class: "horizontal"}) { %>
+		<%= partial("services/form.html") %>
+		<div class="buttons">
+			<button class="btn btn-sm btn-success" role="submit"><%= t("Save")
+				%></button>
+			<a href="<%= servicesPath()
+				%>" class="btn btn-sm btn-warning" data-confirm="<%= t("Are you sure")
+				%>"><%= t("Cancel") %></a>
+		</div>
+	<% } %>
+</div>
+
+<div class="page-tail pull-right">
+</div>
