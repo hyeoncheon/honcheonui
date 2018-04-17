@@ -85,8 +85,8 @@
 [[projects]]
   name = "github.com/gobuffalo/packr"
   packages = ["."]
-  revision = "3402a167bccf1bdd5c93ca820be9f27bba46261e"
-  version = "v1.10.7"
+  revision = "7f4074995d431987caaa35088199f13c44b24440"
+  version = "v1.11.0"
 
 [[projects]]
   name = "github.com/gobuffalo/plush"
@@ -110,8 +110,8 @@
     "fizz/translators",
     "nulls"
   ]
-  revision = "d11f9179130af452f496f91138d120566ae40bed"
-  version = "v4.3.0"
+  revision = "f3c6f37f77403f0a59d6666ca8529d9dd1b4281b"
+  version = "v4.5.0"
 
 [[projects]]
   name = "github.com/gobuffalo/suite"
@@ -202,7 +202,7 @@
     ".",
     "reflectx"
   ]
-  revision = "cf35089a197953c69420c8d0cecda90809764b1d"
+  revision = "2aeb6a910c2b94f2d5eb53d9895d80e27264ec41"
 
 [[projects]]
   name = "github.com/joho/godotenv"
@@ -236,8 +236,8 @@
     "gothic",
     "providers/cloudfoundry"
   ]
-  revision = "15ffa9f4d4eb5144ccc5c505587cbd232235b4f0"
-  version = "v1.45.4"
+  revision = "4933f155d89c3c52ab4ca545c6602cf4a1e87913"
+  version = "1.45.5"
 
 [[projects]]
   branch = "master"
@@ -255,7 +255,7 @@
   branch = "master"
   name = "github.com/markbates/inflect"
   packages = ["."]
-  revision = "adc799c2d667cde52c4d87c04a3dda4940f6fe05"
+  revision = "fbc6b23ce49e2578f572d2e72bb72fa03c7145de"
 
 [[projects]]
   name = "github.com/markbates/refresh"
@@ -286,8 +286,8 @@
     "parser",
     "vm"
   ]
-  revision = "f4b54922efdd844c58a93f8faca1fe0c62ca44c3"
-  version = "v0.0.2"
+  revision = "4e3cdcf522140b26466698841bfdc3227c898043"
+  version = "v0.0.3"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -387,7 +387,7 @@
     "reflectfind",
     "reflectsource"
   ]
-  revision = "364c5ae8518b51f5fda954762864d6f4d5c30c89"
+  revision = "47fa5b7ceee66c60ac3a281416089035bf526a3c"
 
 [[projects]]
   branch = "master"
@@ -457,7 +457,7 @@
   branch = "master"
   name = "github.com/unrolled/secure"
   packages = ["."]
-  revision = "88720c9cbecfcf2eceb9bb4311ad6e398a8381ed"
+  revision = "a1cf62cc2159fff407728f118c41aece76c397fa"
 
 [[projects]]
   branch = "master"
@@ -467,7 +467,7 @@
     "blowfish",
     "ssh/terminal"
   ]
-  revision = "12892e8c234f4fe6f6803f052061de9057903bb2"
+  revision = "d6449816ce06963d9d136eee5a56fca5b0616e7e"
 
 [[projects]]
   branch = "master"
@@ -478,7 +478,7 @@
     "html",
     "html/atom"
   ]
-  revision = "b68f30494add4df6bd8ef5e82803f308e7f7c59c"
+  revision = "8d16fa6dc9a85c1cd3ed24ad08ff21cf94f10888"
 
 [[projects]]
   branch = "master"
@@ -487,7 +487,7 @@
     ".",
     "internal"
   ]
-  revision = "921ae394b9430ed4fb549668d7b087601bd60a81"
+  revision = "6881fee410a5daf86371371f9ad451b95e168b71"
 
 [[projects]]
   branch = "master"
@@ -502,7 +502,7 @@
     "unix",
     "windows"
   ]
-  revision = "378d26f46672a356c46195c28f61bdb4c0a781dd"
+  revision = "ecfd8b563e1320e7282dccf28ad48ec2c68aaebf"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -527,6 +527,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a0ff64fee6cf3c7c6f1cf560c0ea3131257eeaf1f77cde546794a4712b7725cb"
+  inputs-digest = "f2dce7716d2a1705e9cec604234428eec2efecbb91646fe204bf6cda293dd6c2"
   solver-name = "gps-cdcl"
   solver-version = 1
