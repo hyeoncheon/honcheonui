@@ -15,4 +15,4 @@ honcheonui
 database.yml
 /migrations/schema.sql
 
-/plugins
+/plugins/*.so

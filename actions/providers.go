@@ -1,18 +1,17 @@
 package actions
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
-	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 
 	"github.com/hyeoncheon/honcheonui/models"
 	"github.com/hyeoncheon/honcheonui/plugins"
+	"github.com/hyeoncheon/honcheonui/workers"
 )
 
 // ProvidersResource is the resource for the Provider model
@@ -51,7 +50,7 @@ func (v ProvidersResource) Create(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
-	plugin, err := getPlugin(provider.Provider)
+	plugin, err := plugins.GetPlugin(provider.Provider, "provider")
 	if err != nil {
 		return errors.WithStack(err)
 	}
@@ -98,67 +97,14 @@ func (v ProvidersResource) Destroy(c buffalo.Context) error {
 
 // Sync gets resources from provider via plugin API
 func (v ProvidersResource) Sync(c buffalo.Context) error {
-	tx, ok := c.Value("tx").(*pop.Connection)
-	if !ok {
-		return errors.WithStack(errors.New("no transaction found"))
+	args := map[string]interface{}{
+		"provider_id": c.Param("provider_id"),
+	}
+	if err := workers.Run(workers.WorkerResourceSync, args); err != nil {
+		c.Flash().Add("danger", t(c, "Could.not.start.background.sync"))
+	} else {
+		c.Flash().Add("success", t(c, "Resources.will.be.synced.in.background"))
 	}
 
-	provider := &models.Provider{}
-	if err := tx.Find(provider, c.Param("provider_id")); err != nil {
-		return c.Error(http.StatusNotFound, err)
-	}
-
-	plugin, err := getPlugin(provider.Provider)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-	resources, err := plugin.GetResources(provider.User, provider.Pass)
-	if err != nil {
-		return c.Render(http.StatusUnprocessableEntity, r.String("plugin error: %v", err))
-	}
-
-	var ids []uuid.UUID
-	for _, r := range resources {
-		res := &models.Resource{}
-		if jr, err := json.Marshal(r); err == nil {
-			c.Logger().Debugf("------ json: %v", string(jr))
-			re := &plugins.HoncheonuiResource{}
-			if err := json.Unmarshal(jr, re); err != nil {
-				c.Logger().Errorf("error: %v", err)
-				c.Flash().Add("danger", t(c, "could.not.interprete.message"))
-				return c.Redirect(http.StatusSeeOther, "/settings")
-			}
-			copier.Copy(res, re)
-			// universally unique identifier, uuid is not perfectly uniq but almost.
-			// but we can assume it is uniq anyway.
-			// buffalo/pop uses uuid version 4 based on random number generator and
-			// softlayer seems to use real random string as uuid. :-(
-			if res.UUID != uuid.Nil {
-				res.ID = res.UUID
-			}
-			ids = append(ids, res.ID)
-			if err := res.Save(); err != nil {
-				c.Logger().Errorf("saving error: %v", err)
-				c.Logger().Errorf("---- resource: %v", res.JSON())
-				c.Flash().Add("warning", t(c, "could.not.save.resource")+res.String())
-			}
-			for k, v := range re.Attributes {
-				res.AddAttribute(k, v)
-			}
-			if err := res.LinkTags(re.Tags); err != nil {
-				c.Flash().Add("warning", t(c, "problem on mapping tags"))
-			}
-			if err := res.LinkUsers(re.UserIDs); err != nil {
-				c.Flash().Add("warning", t(c, "problem on mapping users"))
-			}
-			// TODO: support IntegerAttributes
-			c.Logger().Debugf("------ re.IntegerAttributes: %v", re.IntegerAttributes)
-		}
-	}
-	if err := provider.LinkResources(ids); err != nil {
-		c.Flash().Add("warning", t(c, "problem on mapping provider"))
-	}
-
-	c.Flash().Add("success", t(c, "resources.was.synced.successfully"))
 	return c.Redirect(http.StatusSeeOther, "/settings")
 }

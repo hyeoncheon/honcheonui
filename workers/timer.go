@@ -22,7 +22,7 @@ func init() {
 	RegisterWorkers(&Worker{
 		HandlerHolder: &Timer{},
 		Name:          WorkerTimer,
-		IsPeriodic:    true,
+		IsPeriodic:    false,
 		InitailDelay:  workerTimerInitailDelay,
 		RunPeriod:     workerTimerRunPeriod,
 	})

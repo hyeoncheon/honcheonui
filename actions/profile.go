@@ -9,6 +9,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/hyeoncheon/honcheonui/models"
+	"github.com/hyeoncheon/honcheonui/plugins"
 )
 
 // ProfileShow renders current member's profile page.
@@ -31,7 +32,7 @@ func ProfileSettings(c buffalo.Context) error {
 	tx.Load(&currentMember.Providers, "Member")
 
 	supportedProviders := make(map[string]string)
-	for _, p := range getPluginList(c) {
+	for _, p := range plugins.GetPluginList(c, "provider") {
 		supportedProviders[p] = p
 	}
 	c.Set("providers", currentMember.Providers)
