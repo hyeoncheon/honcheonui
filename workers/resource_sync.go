@@ -9,6 +9,7 @@ import (
 	"github.com/gobuffalo/uuid"
 	"github.com/jinzhu/copier"
 
+	spec "github.com/hyeoncheon/honcheonui-spec"
 	"github.com/hyeoncheon/honcheonui/models"
 	"github.com/hyeoncheon/honcheonui/plugins"
 )
@@ -79,7 +80,7 @@ func syncResources(id interface{}) error {
 			res := &models.Resource{}
 			if jr, err := json.Marshal(r); err == nil {
 				logger.Debugf("------ found: %v", string(jr))
-				re := &plugins.HoncheonuiResource{}
+				re := &spec.HoncheonuiResource{}
 				if err := json.Unmarshal(jr, re); err != nil {
 					logger.Errorf("error: %v", err)
 					return errors.New("cloud not recognize data format")
