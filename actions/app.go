@@ -12,6 +12,7 @@ import (
 	"github.com/unrolled/secure"
 
 	"github.com/hyeoncheon/honcheonui/models"
+	"github.com/hyeoncheon/honcheonui/workers"
 )
 
 // global variables
@@ -36,6 +37,10 @@ func App() *buffalo.App {
 			SSLRedirect:     ENV == "production",
 			SSLProxyHeaders: map[string]string{"X-Forwarded-Proto": "https"},
 		}))
+
+		if err := workers.InitWorkers(app); err != nil {
+			app.Logger.Errorf("error while initializing workers: %v", err)
+		}
 
 		if ENV == "development" {
 			app.Use(middleware.ParameterLogger)
