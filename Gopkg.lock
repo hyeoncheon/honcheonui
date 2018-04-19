@@ -110,8 +110,8 @@
     "fizz/translators",
     "nulls"
   ]
-  revision = "f3c6f37f77403f0a59d6666ca8529d9dd1b4281b"
-  version = "v4.5.0"
+  revision = "edc965a46240ff6cd9245c9fd366b986ad1972d2"
+  version = "v4.5.2"
 
 [[projects]]
   name = "github.com/gobuffalo/suite"
@@ -478,7 +478,7 @@
     "html",
     "html/atom"
   ]
-  revision = "8d16fa6dc9a85c1cd3ed24ad08ff21cf94f10888"
+  revision = "d41e8174641f662c5a2d1c7a5f9e828788eb8706"
 
 [[projects]]
   branch = "master"
@@ -502,7 +502,7 @@
     "unix",
     "windows"
   ]
-  revision = "ecfd8b563e1320e7282dccf28ad48ec2c68aaebf"
+  revision = "3ccc7e5779793fd54564baf60c51bf017955e0ba"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -527,6 +527,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f2dce7716d2a1705e9cec604234428eec2efecbb91646fe204bf6cda293dd6c2"
+  inputs-digest = "c4bb00ae1396a072b8cca32613164916225602af2518186186f8191f79c351ba"
   solver-name = "gps-cdcl"
   solver-version = 1

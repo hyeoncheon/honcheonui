@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 	"time"
 
@@ -81,9 +80,9 @@ func (s *Service) TaggedResources() *Resources {
 		Where("resources_tags.tag_id in (?)", IDs...).
 		GroupBy("resources.id")
 	if s.MatchAll {
-		//! work around for sql builder bug https://github.com/gobuffalo/pop/issues/65
-		//query = query.Having("count(name) = ?", len(IDs))
-		query = query.Having(fmt.Sprintf("count(name) = %v", len(IDs)))
+		//// `IN` bug fixed https://github.com/gobuffalo/pop/issues/65
+		////query = query.Having(fmt.Sprintf("count(name) = %v", len(IDs)))
+		query = query.Having("count(name) = ?", len(IDs))
 	}
 	if err := query.All(resources); err != nil {
 		logger.Errorf("could not get resources. error: %v", err)
