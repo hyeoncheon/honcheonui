@@ -32,6 +32,11 @@
 - id: OriginalID
   translation: 원본 ID
 
+- id: Incident
+  translation: 징후
+- id: Incidents
+  translation: 징후
+
 # services
 
 - id: Add.New.Service
@@ -86,6 +91,10 @@
   translation: 속성
 - id: Cancel
   translation: 취소
+- id: Category
+  translation: 분류
+- id: Categories
+  translation: 분류
 - id: Close
   translation: 닫기
 - id: Create
@@ -118,6 +127,10 @@
   translation: IP 주소
 - id: IP.Addresses
   translation: IP 주소
+- id: Issued
+  translation: 발급됨
+- id: Issued.By
+  translation: 발급자
 - id: Location
   translation: 위치
 - id: Login
@@ -178,6 +191,8 @@
   translation: 태그
 - id: Tags
   translation: 태그
+- id: Title
+  translation: 제목
 - id: Type
   translation: 유형
 - id: Update

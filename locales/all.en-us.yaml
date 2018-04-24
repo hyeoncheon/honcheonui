@@ -31,6 +31,10 @@
   translation: Linked Services
 - id: OriginalID
   translation: Original ID
+- id: Incident
+  translation: Incident
+- id: Incidents
+  translation: Incidents
 
 # services
 
@@ -84,6 +88,10 @@
   translation: Attributes
 - id: Cancel
   translation: Cancel
+- id: Category
+  translation: Category
+- id: Categories
+  translation: Categories
 - id: Close
   translation: Close
 - id: Create
@@ -116,6 +124,10 @@
   translation: IP Address
 - id: IP.Addresses
   translation: IP Addresses
+- id: Issued
+  translation: Issued
+- id: Issued.By
+  translation: Issued By
 - id: Location
   translation: Location
 - id: Login
@@ -176,6 +188,8 @@
   translation: Tag
 - id: Tags
   translation: Tags
+- id: Title
+  translation: Title
 - id: Type
   translation: Type
 - id: Update
