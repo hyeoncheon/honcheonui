@@ -6,22 +6,24 @@
 	<div class="description"><%= member_id %></div>
 </div>
 
-<div class="page-content row">
-	<div class="content-block col-xs-12" id="settings-profile">
-		<%= partial("profile/profile.html") %>
-		<div class="pull-right">
-			<a href="<%= uart_url %>/membership/me"
-				class="btn btn-sm btn-default"><%= t("See.UART.Profile") %></a>
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+<%= partial("profile/profile.html") %>
+			<div class="pull-right">
+				<a href="<%= uart_url
+					%>/membership/me" class="btn btn-sm btn-default"><%=
+					t("See.UART.Profile") %></a>
+			</div>
 		</div>
-	</div>
 
-	<div class="content-block col-xs-12" id="settings-providers">
-		<h2><%= t("Providers") %></h2>
-		<%= partial("providers/table.html") %>
-		<div class="pull-right">
-			<a class="btn btn-sm btn-default"
-				data-toggle="modal" data-target="#newProvider"><%=
-				t("Add.New.Provider")%></a>
+		<div class="col-xs-12">
+			<h2><%= t("Providers") %></h2>
+<%= partial("providers/table.html") %>
+			<div class="pull-right">
+				<a data-toggle="modal" data-target="#newProvider"
+					class="btn btn-sm btn-default" ><%= t("Add.New.Provider")%></a>
+			</div>
 		</div>
 	</div>
 </div>

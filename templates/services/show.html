@@ -39,28 +39,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h3><%= t("Linked.Resources") %></h3>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th><%= t("Name") %></th>
-						<th><%= t("IP.Address") %></th>
-						<th><%= t("Registered") %></th>
-						<th><%= t("Updated") %></th>
-						<th><%= t("Modified") %></th>
-						<th>&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody><%= for (resource) in resources { %>
-<%= partial("resources/table_row.html") %><% } %>
-				</tbody>
-			</table>
-		</div>
+<%= partial("resources/table.html") %>		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<h3><%= t("Incidents") %></h3>
-<%= partial("incidents/table.html") %>
-		</div>
+<%= partial("incidents/table.html") %>		</div>
 	</div>
 </div>
 

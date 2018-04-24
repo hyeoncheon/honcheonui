@@ -7,21 +7,10 @@
 </div>
 
 <div class="page-content">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th><%= t("Name") %></th>
-				<th><%= t("IP.Address") %></th>
-				<th><%= t("Registered") %></th>
-				<th><%= t("Updated") %></th>
-				<th><%= t("Modified") %></th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody><%= for (resource) in resources { %>
-<%= partial("resources/table_row.html") %><% } %>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-sm-12">
+<%= partial("resources/table.html") %>		</div>
+	</div>
 </div>
 
 <div class="page-tail text-center">

@@ -21,10 +21,11 @@
 			<h3><%= t("Ownerships") %></h3>
 			<div><%= for (p) in resource.Providers { %>
 				<i class="fa fa-caret-right x-list-header"></i>
-				<a href="<%= memberPath({ member_id: p.Member.ID }) %>"
-					class="mixin-normal"><i class="fa fa-user"></i> <%= p.Member %></a>
-				<a title="Group/User: <%= p.GroupID %>/<%= p.UserID %>"
-					class="mixin-normal"><i class="fa fa-link"></i> <%= p %></a><% } %>
+				<a href="<%= memberPath({ member_id: p.Member.ID })
+					%>" class="mixin-normal"><i class="fa fa-user"></i> <%= p.Member
+					%></a> <a title="Group/User: <%= p.GroupID %>/<%= p.UserID
+					%>" class="mixin-normal"><i class="fa fa-link"></i> <%= p
+					%></a><% } %>
 			</div>
 		</div>
 	</div>
@@ -33,20 +34,30 @@
 			<h3><%= t("Details") %></h3>
 			<table class="table table-striped">
 				<tbody>
-					<tr><td><%= t("Provider") %></td><td><%= resource.Provider %></td></tr>
-					<tr><td><%= t("Type") %></td><td><%= resource.Type %></td></tr>
-					<tr><td><%= t("OriginalID") %></td><td><%= resource.OriginalID %></td></tr>
-					<tr><td><%= t("GroupID") %></td><td><%= resource.GroupID %></td></tr>
-					<tr><td><%= t("IP.Address") %></td><td><%= resource.IPAddress %></td></tr>
-					<tr><td><%= t("Location") %></td><td><%= resource.Location %></td></tr>
-					<tr><td><%= t("Registered") %></td><td class="time"
-							form="YYYY-MM-DD hh:mm"><%= resource.CreatedAt %></td></tr>
-					<tr><td><%= t("Updated") %></td><td class="time"
-							form="YYYY-MM-DD hh:mm"><%= resource.UpdatedAt %></td></tr>
-					<tr><td><%= t("Created") %></td><td class="time"
-							form="YYYY-MM-DD hh:mm"><%= resource.ResourceCreatedAt %></td></tr>
-					<tr><td><%= t("Modified") %></td><td class="time"
-							form="YYYY-MM-DD hh:mm"><%= resource.ResourceModifiedAt %></td></tr>
+					<tr><td><%= t("Provider")
+							%></td><td><%= resource.Provider %></td></tr>
+					<tr><td><%= t("Type")
+							%></td><td><%= resource.Type %></td></tr>
+					<tr><td><%= t("OriginalID")
+							%></td><td><%= resource.OriginalID %></td></tr>
+					<tr><td><%= t("GroupID")
+							%></td><td><%= resource.GroupID %></td></tr>
+					<tr><td><%= t("IP.Address")
+							%></td><td><%= resource.IPAddress %></td></tr>
+					<tr><td><%= t("Location")
+							%></td><td><%= resource.Location %></td></tr>
+					<tr><td><%= t("Registered")
+							%></td><td class="time" form="YYYY-MM-DD hh:mm"><%=
+							resource.CreatedAt %></td></tr>
+					<tr><td><%= t("Updated")
+							%></td><td class="time" form="YYYY-MM-DD hh:mm"><%=
+							resource.UpdatedAt %></td></tr>
+					<tr><td><%= t("Created")
+							%></td><td class="time" form="YYYY-MM-DD hh:mm"><%=
+							resource.ResourceCreatedAt %></td></tr>
+					<tr><td><%= t("Modified")
+							%></td><td class="time" form="YYYY-MM-DD hh:mm"><%=
+							resource.ResourceModifiedAt %></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -54,9 +65,8 @@
 			<h3><%= t("Attributes") %></h3>
 			<table class="table table-striped">
 				<tbody><%= for (attr) in resource.Attributes { %>
-					<tr>
-						<td><%= titleize(attr.Name) %></td><td><%= attr.Value %></td>
-					</tr><% } %>
+					<tr><td><%= titleize(attr.Name)
+							%></td><td><%= attr.Value %></td></tr><% } %>
 				</tbody>
 			</table>
 			<h3><%= t("Tags") %></h3>
@@ -68,9 +78,8 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h3><%= t("Incidents") %></h3>
-<% let incidents = resource.Incidents %>
-<%= partial("incidents/table.html") %>
-		</div>
+<% let incidents = resource.Incidents
+%><%= partial("incidents/table.html") %>		</div>
 	</div>
 </div>
 

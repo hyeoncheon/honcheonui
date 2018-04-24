@@ -1,25 +1,25 @@
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th><%= t("Category") %></th>
-			<th><%= t("Title") %></th>
-			<th><%= t("Issued") %></th>
-			<th><%= t("Issued.By") %></th>
-		</tr>
-	</thead>
-	<tbody><%= for (incident) in incidents { %>
-		<tr>
-			<td title="<%= incident.Provider
-				%>/<%= incident.GroupID
-				%>/<%= incident.UserID
-				%>/<%= incident.Type
-				%>/<%= incident.OriginalID
-				%>/<%= incident.IssuedBy
-				%>"><%= incident.Category %></td>
-			<td><a href="<%= incidentPath({ incident_id: incident.ID })
-				%>"><%= incident.Title %></a></td>
-			<td class="time"><%= incident.IssuedAt %></td>
-			<td><%= incident.IssuedBy %></td>
-		</tr><% } %>
-	</tbody>
-</table>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= t("Category") %></th>
+						<th><%= t("Title") %></th>
+						<th><%= t("Issued") %></th>
+						<th><%= t("Issued.By") %></th>
+					</tr>
+				</thead>
+				<tbody><%= for (incident) in incidents { %>
+					<tr>
+						<td title="<%= incident.Provider
+							%>/<%= incident.GroupID
+							%>/<%= incident.UserID
+							%>/<%= incident.Type
+							%>/<%= incident.OriginalID
+							%>/<%= incident.IssuedBy
+							%>"><%= incident.Category %></td>
+						<td><a href="<%= incidentPath({ incident_id: incident.ID })
+							%>"><%= incident.Title %></a></td>
+						<td class="time"><%= incident.IssuedAt %></td>
+						<td><%= incident.IssuedBy %></td>
+					</tr><% } %>
+				</tbody>
+			</table>

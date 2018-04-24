@@ -7,31 +7,35 @@
 </div>
 
 <div class="page-content">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th><%= t("ID") %></th>
-				<th><%= t("Email") %></th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody><%= for (member) in members { %>
-			<tr>
-				<td><a href="<%= memberPath({ member_id: member.ID })
-						%>"><%= member.ID %></a></td>
-				<td><%= member.Email %></td>
-				<td>
-					<div class="pull-right btn-group">
-						<a href="<%= editMemberPath({ member_id: member.ID })
-							%>" class="btn btn-xs btn-warning"><%= t("Edit") %></a>
-						<a href="<%= memberPath({ member_id: member.ID })
-							%>" data-method="DELETE" data-confirm="<%= t("Are you sure")
-							%>" class="btn btn-xs btn-danger"><%= t("Delete") %></a>
-					</div>
-				</td>
-			</tr><% } %>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-xs-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= t("ID") %></th>
+						<th><%= t("Email") %></th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody><%= for (member) in members { %>
+					<tr>
+						<td><a href="<%= memberPath({ member_id: member.ID })
+							%>"><%= member.ID %></a></td>
+						<td><%= member.Email %></td>
+						<td>
+							<div class="pull-right btn-group">
+								<a href="<%= editMemberPath({ member_id: member.ID })
+									%>" class="btn btn-xs btn-warning"><%= t("Edit") %></a>
+								<a href="<%= memberPath({ member_id: member.ID })
+									%>" data-method="DELETE" data-confirm="<%= t("Are you sure")
+									%>" class="btn btn-xs btn-danger"><%= t("Delete") %></a>
+							</div>
+						</td>
+					</tr><% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 <div class="page-tail text-center">

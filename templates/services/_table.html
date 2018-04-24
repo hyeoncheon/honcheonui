@@ -1,0 +1,12 @@
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= t("Member") %></th>
+						<th><%= t("Name") %></th>
+						<th><%= t("Description") %></th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody><%= for (service) in services { %>
+<%= partial("services/table_row.html") %><% } %>				</tbody>
+			</table>

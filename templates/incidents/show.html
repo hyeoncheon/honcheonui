@@ -6,14 +6,11 @@
 	<div class="description"><%= incident.Title %></div>
 </div>
 
-
-
 <div class="page-content">
 	<div class="row">
 		<div class="col-sm-12">
-<% let incidents = [incident] %>
-<%= partial("incidents/table.html") %>
-		</div>
+<% let incidents = [incident]
+%><%= partial("incidents/table.html") %>		</div>
 
 		<div class="col-sm-12">
 			<div class="description mixin-small" style="white-space: pre-wrap"><%=
@@ -23,15 +20,12 @@
 
 		<div class="col-sm-12">
 			<h3><%= t("Linked.Resources") %></h3>
-<% let resources = incident.Resources %>
-<%= partial("resources/table.html") %>
-		</div>
+<% let resources = incident.Resources
+%><%= partial("resources/table.html") %>		</div>
 
 		<div class="col-sm-12">
 			<h3><%= t("Provider") %></h3>
-<% let model = incident %>
-<%= partial("providers/info.html") %>
-		</div>
+<% let model = incident %><%= partial("providers/info.html") %>		</div>
 	</div>
 </div>
 
