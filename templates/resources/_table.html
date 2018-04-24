@@ -1,0 +1,15 @@
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><%= t("Name") %></th>
+				<th><%= t("IP.Address") %></th>
+				<th><%= t("Registered") %></th>
+				<th><%= t("Updated") %></th>
+				<th><%= t("Modified") %></th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody><%= for (resource) in resources { %>
+<%= partial("resources/table_row.html") %><% } %>
+		</tbody>
+	</table>

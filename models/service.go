@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"strings"
 	"time"
 
 	"github.com/gobuffalo/pop"
@@ -46,19 +45,19 @@ type Services []Service
 
 // LinkTags make link maps for the service
 func (s *Service) LinkTags(tagIDs []string) error {
+	hasError := false
 	for _, e := range tagIDs {
 		id, err := uuid.FromString(e)
 		if err != nil {
 			logger.Errorf("invalid parameter! non UUID tag ID: %v", e)
 			return errors.New("invalid request")
 		}
-		if err := DB.Save(&ServicesTags{ServiceID: s.ID, TagID: id}); err != nil {
-			if strings.Contains(err.Error(), "Duplicate") { // mysql case
-				logger.Warnf("duplicated tag map %v to %v: %v", s.ID, id, err)
-			} else {
-				logger.Errorf("could not make tag map %v to %v: %v", s.ID, id, err)
-			}
+		if err := TrySave(&ServicesTags{ServiceID: s.ID, TagID: id}); err != nil {
+			hasError = true
 		}
+	}
+	if hasError {
+		return errors.New("at least one tag is not linked")
 	}
 	return nil
 }
@@ -89,6 +88,29 @@ func (s *Service) TaggedResources() *Resources {
 	}
 
 	return resources
+}
+
+// Incidents returns incidents associated with resources of the service.
+func (s *Service) Incidents() *Incidents {
+	incidents := &Incidents{}
+	if len(s.Tags) < 1 {
+		return incidents
+	}
+
+	var IDs []interface{}
+	for _, t := range s.Tags {
+		IDs = append(IDs, t.ID)
+	}
+
+	query := DB.Q().
+		Join("incidents_resources", "incidents_resources.incident_id = incidents.id").
+		Join("resources", "resources.id = incidents_resources.resource_id").
+		Join("resources_tags", "resources_tags.resource_id = resources.id").
+		Where("resources_tags.tag_id in (?)", IDs...)
+	if err := query.All(incidents); err != nil {
+		logger.Errorf("could not get incidents: %v", err)
+	}
+	return incidents
 }
 
 //*** validators

@@ -40,6 +40,7 @@ func (v ServicesResource) Show(c buffalo.Context) error {
 	}
 	tx.Load(service, "Member", "Tags")
 
+	c.Set("incidents", service.Incidents())
 	c.Set("resources", service.TaggedResources())
 	c.Set("tags", effectiveMember(c).GroupTags())
 	return c.Render(200, r.Auto(c, service))

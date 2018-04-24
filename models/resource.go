@@ -34,6 +34,7 @@ type Resource struct {
 	Tags               Tags       `many_to_many:"resources_tags"`
 	Attributes         Attributes `has_many:"attributes"`
 	Providers          Providers  `many_to_many:"providers_resources"`
+	Incidents          Incidents  `many_to_many:"incidents_resources"`
 }
 
 // ResourcesTags is structure for mapping resources to tags

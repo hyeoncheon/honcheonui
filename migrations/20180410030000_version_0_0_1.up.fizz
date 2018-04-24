@@ -97,3 +97,36 @@ create_table("services_tags", func(t) {
 	t.Column("tag_id", "string", {})
 })
 add_index("services_tags", ["service_id", "tag_id"], {"unique": true})
+
+create_table("incidents", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("provider", "string", {})
+	t.Column("type", "string", {})
+	t.Column("original_id", "string", {})
+	t.Column("group_id", "string", {})
+	t.Column("user_id", "string", {})
+	t.Column("title", "string", {})
+	t.Column("content", "text", {})
+	t.Column("category", "string", {})
+	t.Column("issued_by", "string", {})
+	t.Column("is_open", "bool", {})
+	t.Column("issued_at", "timestamp", {})
+	t.Column("modified_at", "timestamp", {})
+})
+add_index("incidents", ["provider", "type", "original_id"], {"unique": true})
+add_index("incidents", "group_id", {})
+add_index("incidents", "user_id", {})
+
+create_table("incidents_resources", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("incident_id", "uuid", {})
+	t.Column("resource_id", "uuid", {})
+})
+add_index("incidents_resources", ["incident_id", "resource_id"], {"unique": true})
+
+create_table("incidents_users", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("incident_id", "uuid", {})
+	t.Column("user_id", "string", {})
+})
+add_index("incidents_users", ["incident_id", "user_id"], {"unique": true})

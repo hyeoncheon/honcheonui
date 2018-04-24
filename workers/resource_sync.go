@@ -19,7 +19,7 @@ import (
 // constants belongs to this worker
 const (
 	WorkerResourceSync             = "worker.ResourceSync"
-	workerResourceSyncInitailDelay = 10 * time.Second
+	workerResourceSyncInitailDelay = 10 * time.Minute
 	workerResourceSyncRunPeriod    = 24 * time.Hour
 )
 

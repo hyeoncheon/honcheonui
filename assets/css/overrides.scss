@@ -1,3 +1,5 @@
+$font-size: 16px;
+
 $color-border: #ccc;
 
 $color-text: #303030;
@@ -9,6 +11,7 @@ $color-matt: #f9f9f9;
 .mixin-red { color: red; }
 .mixin-orange { color: orange; }
 .mixin-normal { color: $color-text; }
+.mixin-small { font-size: $font-size - 2px; }
 
 /* override default styles of bootstrap */
 
@@ -21,6 +24,9 @@ $color-matt: #f9f9f9;
 	border-bottom: 1px solid $color-border;
 	h1 {
 		margin-top: 0;
+	}
+	div.description {
+		min-height: 1.2em;
 	}
 }
 

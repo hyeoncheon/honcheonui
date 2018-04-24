@@ -1,0 +1,25 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Category</th>
+			<th>Title</th>
+			<th>Issued</th>
+			<th>By</th>
+		</tr>
+	</thead>
+	<tbody><%= for (incident) in incidents { %>
+		<tr>
+			<td title="<%= incident.Provider
+				%>/<%= incident.GroupID
+				%>/<%= incident.UserID
+				%>/<%= incident.Type
+				%>/<%= incident.OriginalID
+				%>/<%= incident.IssuedBy
+				%>"><%= incident.Category %></td>
+			<td><a href="<%= incidentPath({ incident_id: incident.ID })
+				%>"><%= incident.Title %></a></td>
+			<td class="time"><%= incident.IssuedAt %></td>
+			<td><%= incident.IssuedBy %></td>
+		</tr><% } %>
+	</tbody>
+</table>
