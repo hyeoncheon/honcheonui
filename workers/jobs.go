@@ -62,8 +62,12 @@ func InitWorkers(app *buffalo.App) error {
 			logger.Errorf("could not register worker %v: %v", name, err)
 			continue
 		}
+		if app.Env != "production" {
+			logger.Infof("run in %v mode. skip periodic job queuing for %v", app.Env, name)
+			continue
+		}
 		if wkr.IsPeriodic && wkr.RunPeriod >= (5*time.Second) {
-			logger.Infof("%v is periodic worker. initial queueing...", name)
+			logger.Infof("%v is periodic worker. initial queuing...", name)
 			err := Queue(
 				workerRepeater,
 				map[string]interface{}{
