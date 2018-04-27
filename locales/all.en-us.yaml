@@ -11,6 +11,14 @@
 - id: Are you sure
   translation: Unrecoverable. Are you sure?
 
+# administration
+- id: Data.Management
+  translation: Data Management
+- id: Get.Notifications
+  translation: Get Notifications
+- id: Get.notifications.manually
+  translation: Get notifications manually
+
 # profile/settings
 
 - id: See.UART.Profile
@@ -94,6 +102,8 @@
   translation: Categories
 - id: Close
   translation: Close
+- id: Code
+  translation: Code
 - id: Create
   translation: Create
 - id: Created

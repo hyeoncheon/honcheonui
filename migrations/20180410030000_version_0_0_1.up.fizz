@@ -108,6 +108,7 @@ create_table("incidents", func(t) {
 	t.Column("title", "string", {})
 	t.Column("content", "text", {})
 	t.Column("category", "string", {})
+	t.Column("code", "integer", {})
 	t.Column("issued_by", "string", {})
 	t.Column("is_open", "bool", {})
 	t.Column("issued_at", "timestamp", {})

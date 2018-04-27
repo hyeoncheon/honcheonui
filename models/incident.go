@@ -24,6 +24,7 @@ type Incident struct {
 	Title      string    `json:"title" db:"title"`
 	Content    string    `json:"content" db:"content"`
 	Category   string    `json:"category" db:"category"`
+	Code       int       `json:"code" db:"code"`
 	IssuedBy   string    `json:"issued_by" db:"issued_by"`
 	IsOpen     bool      `json:"is_open" db:"is_open"`
 	IssuedAt   time.Time `json:"issued_at" db:"issued_at"`

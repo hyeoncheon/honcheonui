@@ -1,0 +1,27 @@
+<div class="page-header">
+	<h1><%= t("Administration") %></h1>
+	<div class="pull-right">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="description"></div>
+</div>
+
+<div class="page-content">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3><%= t("Data.Management") %></h3>
+			<div>
+				<div class="col-xs-3">
+					<a href="<%= adminSyncNotificationPath()
+						%>"><%= t("Get.Notifications") %></a>
+				</div>
+				<div class="col-xs-9">
+					<%= t("Get.notifications.manually") %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="page-tail pull-right">
+</div>

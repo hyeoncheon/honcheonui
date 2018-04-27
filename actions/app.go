@@ -89,6 +89,11 @@ func App() *buffalo.App {
 		app.Resource("/services", ServicesResource{})
 		app.POST("/services/{service_id}/add_tags", ServicesResource{}.AddTags)
 		app.GET("/incidents/{incident_id}", IncidentsResource{}.Show)
+
+		admin := app.Group("/admin")
+		admin.GET("/", AdminHandler)
+		admin.GET("/sync/notification", AdminSyncNotification)
+
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
