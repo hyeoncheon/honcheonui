@@ -2,14 +2,13 @@ package actions
 
 import (
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/buffalo/middleware"
-	"github.com/gobuffalo/buffalo/middleware/csrf"
-	"github.com/gobuffalo/buffalo/middleware/i18n"
-	"github.com/gobuffalo/buffalo/middleware/ssl"
+	"github.com/gobuffalo/buffalo-pop/v2/pop/popmw"
 	"github.com/gobuffalo/envy"
-	"github.com/gobuffalo/packr"
+	csrf "github.com/gobuffalo/mw-csrf"
+	i18n "github.com/gobuffalo/mw-i18n"
+	paramlogger "github.com/gobuffalo/mw-paramlogger"
+	"github.com/gobuffalo/packr/v2"
 	"github.com/markbates/goth/gothic"
-	"github.com/unrolled/secure"
 
 	"github.com/hyeoncheon/honcheonui/models"
 	"github.com/hyeoncheon/honcheonui/workers"
@@ -32,18 +31,13 @@ func App() *buffalo.App {
 			SessionName: "_honcheonui_session",
 			// TODO: add secure session store. should it be redis?
 		})
-		// Automatically redirect to SSL
-		app.Use(ssl.ForceSSL(secure.Options{
-			SSLRedirect:     ENV == "production",
-			SSLProxyHeaders: map[string]string{"X-Forwarded-Proto": "https"},
-		}))
 
 		if err := workers.InitWorkers(app); err != nil {
 			app.Logger.Errorf("error while initializing workers: %v", err)
 		}
 
 		if ENV == "development" {
-			app.Use(middleware.ParameterLogger)
+			app.Use(paramlogger.ParameterLogger)
 		}
 
 		// https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
@@ -51,7 +45,7 @@ func App() *buffalo.App {
 
 		// Wraps each request in a transaction.
 		//  c.Value("tx").(*pop.PopTransaction)
-		app.Use(middleware.PopTransaction(models.DB))
+		app.Use(popmw.Transaction(models.DB))
 		models.SetLogger(app.Logger)
 
 		// Setup and use translations:

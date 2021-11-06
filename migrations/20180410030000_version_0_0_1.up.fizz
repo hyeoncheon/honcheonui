@@ -1,10 +1,10 @@
 
-create_table("members", func(t) {
+create_table("members") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("email", "string", {})
-})
+}
 
-create_table("providers", func(t) {
+create_table("providers") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("member_id", "uuid", {})
 	t.Column("provider", "string", {})
@@ -12,19 +12,19 @@ create_table("providers", func(t) {
 	t.Column("pass", "string", {})
 	t.Column("group_id", "string", {})
 	t.Column("user_id", "string", {})
-})
+}
 add_index("providers", "member_id", {})
 add_index("providers", "group_id", {})
 add_index("providers", "user_id", {})
 
-create_table("providers_resources", func(t) {
+create_table("providers_resources") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("provider_id", "uuid", {})
 	t.Column("resource_id", "uuid", {})
-})
+}
 add_index("providers_resources", ["provider_id", "resource_id"], {"unique": true})
 
-create_table("resources", func(t) {
+create_table("resources") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("provider", "string", {})
 	t.Column("type", "string", {})
@@ -39,66 +39,66 @@ create_table("resources", func(t) {
 	t.Column("location", "string", {})
 	t.Column("is_conn", "bool", {"default": false})
 	t.Column("is_on", "bool", {"default": false})
-})
+}
 add_index("resources", "group_id", {})
 add_index("resources", ["provider", "type", "original_id"], {"unique": true})
 
-create_table("resources_tags", func(t) {
+create_table("resources_tags") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("resource_id", "uuid", {})
 	t.Column("tag_id", "uuid", {})
-})
+}
 add_index("resources_tags", "resource_id", {})
 add_index("resources_tags", "tag_id", {})
 add_index("resources_tags", ["resource_id", "tag_id"], {"unique": true})
 
-create_table("resources_users", func(t) {
+create_table("resources_users") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("resource_id", "uuid", {})
 	t.Column("user_id", "string", {})
-})
+}
 add_index("resources_users", "resource_id", {})
 add_index("resources_users", "user_id", {})
 add_index("resources_users", ["resource_id", "user_id"], {"unique": true})
 
-create_table("attributes", func(t) {
+create_table("attributes") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("resource_id", "uuid", {})
 	t.Column("name", "string", {})
 	t.Column("value", "string", {})
 	t.ForeignKey("resource_id", {"resources": ["id"]}, {"on_delete": "cascade"})
-})
+}
 add_index("attributes", "resource_id", {})
 add_index("attributes", ["resource_id", "name"], {"unique": true})
 
-create_table("tags", func(t) {
+create_table("tags") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("name", "string", {})
-})
+}
 
-create_table("services", func(t) {
+create_table("services") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("member_id", "uuid", {})
 	t.Column("name", "string", {})
 	t.Column("description", "string", {})
 	t.Column("match_all", "bool", {"default": true})
-})
+}
 
-create_table("services_resources", func(t) {
+create_table("services_resources") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("service_id", "uuid", {})
 	t.Column("resource_id", "string", {})
-})
+}
 add_index("services_resources", ["service_id", "resource_id"], {"unique": true})
 
-create_table("services_tags", func(t) {
+create_table("services_tags") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("service_id", "uuid", {})
 	t.Column("tag_id", "string", {})
-})
+}
 add_index("services_tags", ["service_id", "tag_id"], {"unique": true})
 
-create_table("incidents", func(t) {
+create_table("incidents") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("provider", "string", {})
 	t.Column("type", "string", {})
@@ -113,21 +113,21 @@ create_table("incidents", func(t) {
 	t.Column("is_open", "bool", {})
 	t.Column("issued_at", "timestamp", {})
 	t.Column("modified_at", "timestamp", {})
-})
+}
 add_index("incidents", ["provider", "type", "original_id"], {"unique": true})
 add_index("incidents", "group_id", {})
 add_index("incidents", "user_id", {})
 
-create_table("incidents_resources", func(t) {
+create_table("incidents_resources") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("incident_id", "uuid", {})
 	t.Column("resource_id", "uuid", {})
-})
+}
 add_index("incidents_resources", ["incident_id", "resource_id"], {"unique": true})
 
-create_table("incidents_users", func(t) {
+create_table("incidents_users") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("incident_id", "uuid", {})
 	t.Column("user_id", "string", {})
-})
+}
 add_index("incidents_users", ["incident_id", "user_id"], {"unique": true})

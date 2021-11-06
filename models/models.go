@@ -6,15 +6,16 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
-	"github.com/gobuffalo/pop"
+	"github.com/gobuffalo/logger"
+	"github.com/gobuffalo/pop/v5"
 )
 
 // DB is a connection to your database to be used throughout your application.
 var DB *pop.Connection
 
 // default logger and security logger
-var logger = buffalo.NewLogger("Debug").WithField("category", "models")
-var slogger = logger.WithField("category", "security")
+var mlogger = logger.NewLogger("Debug").WithField("category", "models")
+var slogger = mlogger.WithField("category", "security")
 
 func init() {
 	var err error
@@ -28,12 +29,12 @@ func init() {
 
 // SetLogger sets logger and slogger with external logger
 func SetLogger(l buffalo.Logger) {
-	logger = l.WithField("category", "models")
-	slogger = logger.WithField("category", "security")
+	mlogger = l.WithField("category", "models")
+	slogger = mlogger.WithField("category", "security")
 }
 
 func inspect(desc string, data interface{}) {
-	logger.Debugf("inspect: %v: %v", desc, JSON(data))
+	mlogger.Debugf("inspect: %v: %v", desc, JSON(data))
 }
 
 // JSON returns json formatted object

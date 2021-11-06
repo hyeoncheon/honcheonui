@@ -4,10 +4,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
+	"github.com/gofrs/uuid"
 )
 
 // Service is a structure for service.
@@ -50,7 +50,7 @@ type Services []Service
 func (s *Service) HasResource(r *Resource) bool {
 	count, err := DB.Where("service_id = ?", s.ID).Count(&ServicesTags{})
 	if err != nil {
-		logger.Errorf("database error: %v", err)
+		mlogger.Errorf("database error: %v", err)
 		return false
 	}
 
@@ -66,9 +66,9 @@ func (s *Service) HasResource(r *Resource) bool {
 	}
 	resources := &Resources{}
 	if err := query.All(resources); err != nil {
-		logger.Errorf("could not get resources. error: %v", err)
+		mlogger.Errorf("could not get resources. error: %v", err)
 	}
-	logger.Debugf("%v has %v tags and %v is matched", s, count, *resources)
+	mlogger.Debugf("%v has %v tags and %v is matched", s, count, *resources)
 
 	return len(*resources) == 1
 }
@@ -81,7 +81,7 @@ func (s *Service) LinkTags(tagIDs []string) error {
 	for _, e := range tagIDs {
 		id, err := uuid.FromString(e)
 		if err != nil {
-			logger.Errorf("invalid parameter! non UUID tag ID: %v", e)
+			mlogger.Errorf("invalid parameter! non UUID tag ID: %v", e)
 			return errors.New("invalid request")
 		}
 		//? should I add tag entry checking?
@@ -120,7 +120,7 @@ func (s *Service) TaggedResources() *Resources {
 		query = query.Having("count(name) = ?", len(IDs))
 	}
 	if err := query.All(resources); err != nil {
-		logger.Errorf("could not get resources. error: %v", err)
+		mlogger.Errorf("could not get resources. error: %v", err)
 	}
 
 	return resources
@@ -145,7 +145,7 @@ func (s *Service) Incidents() *Incidents {
 		Join("resources_tags", "resources_tags.resource_id = resources.id").
 		Where("resources_tags.tag_id in (?)", IDs...)
 	if err := query.All(incidents); err != nil {
-		logger.Errorf("could not get incidents: %v", err)
+		mlogger.Errorf("could not get incidents: %v", err)
 	}
 	return incidents
 }

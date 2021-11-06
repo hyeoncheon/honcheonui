@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
 	"github.com/hyeoncheon/honcheonui/models"

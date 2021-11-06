@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
+	"github.com/gofrs/uuid"
 )
 
 // Incident is a struct for most atomic incident and event records.
@@ -74,9 +74,9 @@ func (i *Incident) LinkResourcesByOrigIDs(IDs ...string) error {
 		resource := &Resource{}
 		if err := DB.Where("original_id = ?", id).First(resource); err != nil {
 			if strings.Contains(err.Error(), "no rows") {
-				logger.Warnf("no resource with original_id %v", id)
+				mlogger.Warnf("no resource with original_id %v", id)
 			} else {
-				logger.Errorf("database error: %v", err)
+				mlogger.Errorf("database error: %v", err)
 			}
 			continue
 		}
@@ -89,7 +89,7 @@ func (i *Incident) LinkResourcesByOrigIDs(IDs ...string) error {
 		}
 	}
 	if success < len(IDs) {
-		logger.Warnf("only %v entries saved out of %v requests", success, len(IDs))
+		mlogger.Warnf("only %v entries saved out of %v requests", success, len(IDs))
 	}
 	return nil
 }
@@ -102,7 +102,7 @@ func (i *Incident) LinkUsers(IDs ...string) error {
 			IncidentID: i.ID,
 			UserID:     id,
 		}); err != nil {
-			logger.Errorf("could not link with %v", id)
+			mlogger.Errorf("could not link with %v", id)
 		}
 	}
 	return nil

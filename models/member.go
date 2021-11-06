@@ -4,10 +4,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
+	"github.com/gofrs/uuid"
 )
 
 // Member is a model for storing information of service user
@@ -61,7 +61,7 @@ func (m *Member) GroupTags() *Tags {
 	*/
 	err := query.All(tags)
 	if err != nil {
-		logger.Errorf("get all tags error: %v", err)
+		mlogger.Errorf("get all tags error: %v", err)
 	}
 	return tags
 }

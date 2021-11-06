@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
+	"github.com/gofrs/uuid"
 	"github.com/hyeoncheon/honcheonui/utils"
 )
 
@@ -103,7 +103,7 @@ func (r *Resource) Services() *Services {
 		Where("services_tags.tag_id in (?)", IDs...).
 		GroupBy("services.id")
 	if err := query.All(svcs); err != nil {
-		logger.Errorf("could not get resources. error: %v", err)
+		mlogger.Errorf("could not get resources. error: %v", err)
 	}
 
 	for _, svc := range *svcs {
@@ -138,13 +138,13 @@ func (r *Resource) LinkTags(ts []string) error {
 	if err != nil {
 		return errors.New("could not convert argument to interface slice")
 	}
-	logger.Debugf("link tags requested: %v", requestedTags)
+	mlogger.Debugf("link tags requested: %v", requestedTags)
 
 	hasError := false
 	// get existing tag map and remove them from given list.
 	existingMaps := &RTMaps{}
 	if err := DB.Where("resource_id = ?", r.ID).All(existingMaps); err != nil {
-		logger.Errorf("database selection failed! error: %v", err)
+		mlogger.Errorf("database selection failed! error: %v", err)
 	}
 	for _, m := range *existingMaps {
 		existingTag := &Tag{}
@@ -152,48 +152,48 @@ func (r *Resource) LinkTags(ts []string) error {
 		if err != nil { // in case of broken link map, but why? safety?
 			err := DB.Destroy(&m)
 			if err != nil {
-				logger.Errorf("found broken map but could not delete: id:%v", m.ID)
+				mlogger.Errorf("found broken map but could not delete: id:%v", m.ID)
 			} else {
-				logger.Warnf("found broken map and deleted: id:%v", m.ID)
+				mlogger.Warnf("found broken map and deleted: id:%v", m.ID)
 			}
 		}
 
 		if utils.Has(requestedTags, existingTag.Name) {
 			requestedTags = utils.Remove(requestedTags, existingTag.Name)
 		} else {
-			logger.Debugf("removing %v from map. no longer exists", existingTag.Name)
+			mlogger.Debugf("removing %v from map. no longer exists", existingTag.Name)
 			if err := DB.Destroy(&m); err != nil {
-				logger.Errorf("could not remove  %v from the map", m)
+				mlogger.Errorf("could not remove  %v from the map", m)
 				hasError = true
 			}
 		}
 	}
 
-	logger.Debugf("adding new tags...: %v", requestedTags)
+	mlogger.Debugf("adding new tags...: %v", requestedTags)
 	for _, t := range requestedTags {
 		name := strings.TrimSpace(t.(string)) //! check me
 
 		// search existing tag entry or create new one.
 		tag := &Tag{}
 		if err := DB.Where("name = ?", name).First(tag); err != nil { // if none
-			logger.Debugf("create new tag %v...", name)
+			mlogger.Debugf("create new tag %v...", name)
 			tag.Name = name
 			verrs, err := DB.ValidateAndCreate(tag)
 			if verrs.HasAny() {
-				logger.Errorf("could not save resource-tag map %v: %v", tag, verrs)
+				mlogger.Errorf("could not save resource-tag map %v: %v", tag, verrs)
 			}
 			if err != nil {
-				logger.Errorf("could not save resource-tag map %v: %v", tag, err)
+				mlogger.Errorf("could not save resource-tag map %v: %v", tag, err)
 			}
 		}
 
-		logger.Debugf("creating map for %v on %v", name, r)
+		mlogger.Debugf("creating map for %v on %v", name, r)
 		rtmap := &ResourcesTags{
 			ResourceID: r.ID,
 			TagID:      tag.ID,
 		}
 		if err := DB.Save(rtmap); err != nil {
-			logger.Errorf("could not save resource-tag map %v: %v", rtmap, err)
+			mlogger.Errorf("could not save resource-tag map %v: %v", rtmap, err)
 			hasError = true
 		}
 	}
@@ -210,35 +210,35 @@ func (r *Resource) LinkUsers(us []string) error {
 	if err != nil {
 		return errors.New("could not convert argument to interface slice")
 	}
-	logger.Debugf("link users requested: %v", requestedUsers)
+	mlogger.Debugf("link users requested: %v", requestedUsers)
 
 	hasError := false
 	// get existing user map and remove them from given list
 	maps := &RUMaps{}
 	if err := DB.Where("resource_id = ?", r.ID).All(maps); err != nil {
-		logger.Errorf("database selection failed! error: %v", err)
+		mlogger.Errorf("database selection failed! error: %v", err)
 	}
 	for _, m := range *maps {
 		if utils.Has(requestedUsers, m.UserID) {
 			requestedUsers = utils.Remove(requestedUsers, m.UserID)
 		} else {
-			logger.Debugf("removing %v from map. no longer exists", m.UserID)
+			mlogger.Debugf("removing %v from map. no longer exists", m.UserID)
 			if err := DB.Destroy(&m); err != nil {
-				logger.Errorf("could not remove user %v from the map", m)
+				mlogger.Errorf("could not remove user %v from the map", m)
 				hasError = true
 			}
 		}
 	}
 
-	logger.Debugf("adding new users...: %v", requestedUsers)
+	mlogger.Debugf("adding new users...: %v", requestedUsers)
 	for _, u := range requestedUsers {
-		logger.Debugf("creating map for %v on %v", u, r)
+		mlogger.Debugf("creating map for %v on %v", u, r)
 		rumap := &ResourcesUsers{
 			ResourceID: r.ID,
 			UserID:     u.(string), //! check me
 		}
 		if err := DB.Save(rumap); err != nil {
-			logger.Errorf("could not save resource-user map %v: %v", rumap, err)
+			mlogger.Errorf("could not save resource-user map %v: %v", rumap, err)
 			hasError = true
 		}
 	}

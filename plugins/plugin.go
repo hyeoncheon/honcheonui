@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/gobuffalo/buffalo"
-	spec "github.com/hyeoncheon/honcheonui-spec"
+	"github.com/hyeoncheon/spec"
 )
 
 // TODO: plugin caching

@@ -4,8 +4,8 @@ import (
 	"html/template"
 
 	"github.com/gobuffalo/buffalo/render"
-	"github.com/gobuffalo/packr"
-	"github.com/gobuffalo/uuid"
+	"github.com/gobuffalo/packr/v2"
+	"github.com/gofrs/uuid"
 	"github.com/markbates/inflect"
 )
 

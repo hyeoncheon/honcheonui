@@ -4,10 +4,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/uuid"
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/pop/v5"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
+	"github.com/gofrs/uuid"
 	"github.com/hyeoncheon/honcheonui/utils"
 )
 
@@ -43,7 +43,7 @@ func (p Provider) String() string {
 // Owner returns owner of the provider entity
 // DEPRECATED: now buffalo support assotiation more easily with Eager() and Load()
 func (p Provider) Owner() *Member {
-	logger.Warn("using obsoleted method")
+	mlogger.Warn("using obsoleted method")
 	member := &Member{}
 	if err := DB.Find(member, p.MemberID); err != nil {
 		return nil
@@ -65,37 +65,37 @@ func (p *Provider) LinkResources(oids []uuid.UUID) error {
 	if err != nil {
 		return errors.New("could not convert argument to interface slice")
 	}
-	logger.Debugf("link resources requested: %v", ids)
+	mlogger.Debugf("link resources requested: %v", ids)
 	hasError := false
 
 	// get existing mappings and remove them from given list
 	maps := &ProvidersResourcesMaps{}
 	if err := DB.Where("provider_id = ?", p.ID).All(maps); err != nil {
-		logger.Errorf("database selection failed! error: %v", err)
+		mlogger.Errorf("database selection failed! error: %v", err)
 	}
 	for _, m := range *maps {
-		logger.Debugf("check %v is on the list...", m.ResourceID)
+		mlogger.Debugf("check %v is on the list...", m.ResourceID)
 		if utils.Has(ids, m.ResourceID) {
 			ids = utils.Remove(ids, m.ResourceID)
-			logger.Debugf("removed existing resource from list: %v", ids)
+			mlogger.Debugf("removed existing resource from list: %v", ids)
 		} else {
-			logger.Debugf("removing %v from map. no longer exists", m.ResourceID)
+			mlogger.Debugf("removing %v from map. no longer exists", m.ResourceID)
 			if err := DB.Destroy(&m); err != nil {
-				logger.Errorf("could not remove resource %v from the map", m)
+				mlogger.Errorf("could not remove resource %v from the map", m)
 				hasError = true
 			}
 		}
 	}
 
-	logger.Debugf("adding new resources: %v", ids)
+	mlogger.Debugf("adding new resources: %v", ids)
 	for _, id := range ids {
-		logger.Debugf("creating map for %v on %v", id, p)
+		mlogger.Debugf("creating map for %v on %v", id, p)
 		prmap := &ProvidersResources{
 			ProviderID: p.ID,
 			ResourceID: id.(uuid.UUID), //! check me
 		}
 		if err := DB.Save(prmap); err != nil {
-			logger.Errorf("could not save provider-resource map %v: %v", prmap, err)
+			mlogger.Errorf("could not save provider-resource map %v: %v", prmap, err)
 			hasError = true
 		}
 	}

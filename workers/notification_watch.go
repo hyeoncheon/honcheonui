@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/gobuffalo/buffalo/worker"
+	"github.com/hyeoncheon/spec"
 	"github.com/jinzhu/copier"
 
-	"github.com/hyeoncheon/honcheonui-spec"
 	"github.com/hyeoncheon/honcheonui/models"
 	"github.com/hyeoncheon/honcheonui/plugins"
 )
@@ -31,6 +31,8 @@ func init() {
 		IsPeriodic:    true,
 		InitailDelay:  workerNotificationWatchInitailDelay,
 		RunPeriod:     workerNotificationWatchRunPeriod,
+		LastQueuedAt:  time.Time{},
+		CountQueued:   0,
 	})
 }
 

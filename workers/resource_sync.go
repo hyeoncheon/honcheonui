@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/gobuffalo/buffalo/worker"
-	"github.com/gobuffalo/uuid"
+	"github.com/gofrs/uuid"
+	"github.com/hyeoncheon/spec"
 	"github.com/jinzhu/copier"
 
-	spec "github.com/hyeoncheon/honcheonui-spec"
 	"github.com/hyeoncheon/honcheonui/models"
 	"github.com/hyeoncheon/honcheonui/plugins"
 )
