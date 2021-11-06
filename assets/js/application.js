@@ -1,5 +1,5 @@
-require("expose-loader?$!expose-loader?jQuery!jquery");
-require("bootstrap-sass/assets/javascripts/bootstrap.js");
+require("expose-loader?exposes=$,jQuery!jquery");
+require("bootstrap/dist/js/bootstrap.bundle.js");
 $(() => {
 
 });
